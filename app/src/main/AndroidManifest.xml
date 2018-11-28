@@ -9,8 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- android:screenOrientation="portrait" 配置屏幕方向-->
-        <activity android:name=".activity.LoadingActivity" android:screenOrientation="portrait">
+
+        <!-- android:screenOrientation="portrait" 配置屏幕方向 -->
+        <activity
+            android:name=".load.LoadingActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +23,12 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_loading"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            ></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
