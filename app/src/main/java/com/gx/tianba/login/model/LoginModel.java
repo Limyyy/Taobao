@@ -14,13 +14,10 @@ import okhttp3.Response;
 
 public class LoginModel {
     public void login(String mobile,String password,final loginCallBack loginCallBack){
-        BaseRequest baseRequest=new BaseRequest();
-        baseRequest.mobile=mobile;
-        baseRequest.password=password;
-        OkHttpUtils.enqueuePost(new Callback() {
+        OkHttpUtils.enqueueGet(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                loginCallBack.onConnectionFailer("连接服务器超时");
             }
 
             @Override
@@ -41,11 +38,12 @@ public class LoginModel {
 
                 }
             }
-        },HttpUrl.LOGIN_URL,baseRequest);
+        },HttpUrl.LOGIN_URL+"?mobile="+mobile+"&password="+password);
     }
 
     public interface loginCallBack{
         void onSuccess(Login login);
         void onFailer(String msg);
+        void onConnectionFailer(String msg);
     }
 }

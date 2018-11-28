@@ -41,17 +41,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin.setOnClickListener(this);
         bar = (ProgressBar) findViewById(R.id.bar);
         bar.setOnClickListener(this);
+        bar.setVisibility(View.GONE);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnRegister:
-
                 break;
             case R.id.btnLogin:
                 //如果不是快速点击按钮的话才登录
                 if (!ButtonUtil.ifFastClick()){
+                    bar.setVisibility(View.VISIBLE);
                     submit();
                 }
                 break;
@@ -76,22 +77,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void showLoading() {
-
+        bar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                bar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
     public void onLoginSuccess(Login login) {
-
+        bar.setVisibility(View.GONE);
     }
 
     @Override
-    public void onLoginFailer(String msg) {
-
+    public void onLoginFailer(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(LoginActivity.this,""+msg,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //防止内存泄漏

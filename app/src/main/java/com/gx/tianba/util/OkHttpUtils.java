@@ -25,7 +25,9 @@ public class OkHttpUtils {
         builder.readTimeout(3000,TimeUnit.MILLISECONDS);
         builder.connectTimeout(3000,TimeUnit.MILLISECONDS);
         builder.writeTimeout(3000,TimeUnit.MILLISECONDS);
-        okHttpClient = builder.build();
+        okHttpClient = builder
+                .addInterceptor(new OkHttpInterceptors())
+                .build();
     }
     public static Request createRequest(String url, String method, BaseRequest baseRequest){
         RequestBody body=null;
