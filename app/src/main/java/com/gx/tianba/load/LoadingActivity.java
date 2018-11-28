@@ -10,6 +10,7 @@ import android.view.View;
 import com.gx.tianba.MainActivity;
 import com.gx.tianba.R;
 import com.gx.tianba.load.adapter.LoadingPagerAdapter;
+import com.gx.tianba.login.activity.LoginActivity;
 import com.gx.tianba.util.Constant;
 
 import java.util.ArrayList;
@@ -68,18 +69,30 @@ public class LoadingActivity extends AppCompatActivity {
         });
     }
     public void initData(){
-        listImages.add(R.mipmap.chen1);
-        listImages.add(R.mipmap.chen2);
-        listImages.add(R.mipmap.chen3);
-        vpLoadingPage.setAdapter(new LoadingPagerAdapter(listImages));
+        if (isFirst()){
+            yesJump();
+        }
+        else {
+            listImages.add(R.mipmap.chen1);
+            listImages.add(R.mipmap.chen2);
+            listImages.add(R.mipmap.chen3);
+            vpLoadingPage.setAdapter(new LoadingPagerAdapter(listImages));
+        }
+
     }
     public void jump(){
         SharedPreferences sharedPreferences = getSharedPreferences(Constant.SP_NAME, MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putBoolean(Constant.IS_FIRST_LOGIN,true);
         edit.commit();
-        Intent intent=new Intent(LoadingActivity.this,MainActivity.class);
+        Intent intent=new Intent(LoadingActivity.this,LoginActivity.class);
         startActivity(intent);
+        finish();
+    }
+    public void yesJump(){
+        Intent intent=new Intent(LoadingActivity.this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public boolean isFirst(){
