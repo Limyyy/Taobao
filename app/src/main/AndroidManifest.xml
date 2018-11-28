@@ -37,6 +37,10 @@
         <activity
             android:name=".shop.activity.ShopActivity"
             android:label="@string/title_activity_shop"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".shopcart.activity.ShopCartActivity"
+            android:label="@string/title_activity_shop_car"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
