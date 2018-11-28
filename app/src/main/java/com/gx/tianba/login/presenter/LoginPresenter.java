@@ -1,7 +1,6 @@
 package com.gx.tianba.login.presenter;
 
-import com.google.gson.Gson;
-import com.gx.tianba.bean.Login;
+import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.login.model.LoginModel;
 import com.gx.tianba.login.view.ILoginView;
 

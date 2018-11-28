@@ -1,4 +1,4 @@
-package com.gx.tianba.bean;
+package com.gx.tianba.login.bean;
 
 public class Login {
 

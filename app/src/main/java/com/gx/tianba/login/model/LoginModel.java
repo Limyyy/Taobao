@@ -1,8 +1,7 @@
 package com.gx.tianba.login.model;
 
 import com.google.gson.Gson;
-import com.gx.tianba.base.BaseRequest;
-import com.gx.tianba.bean.Login;
+import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.HttpUrl;
 import com.gx.tianba.util.OkHttpUtils;
 

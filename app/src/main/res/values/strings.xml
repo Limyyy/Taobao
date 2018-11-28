@@ -2,4 +2,5 @@
     <string name="app_name">天霸商城</string>
     <string name="title_activity_loading">LoadingActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_shop">ShopActivity</string>
 </resources>

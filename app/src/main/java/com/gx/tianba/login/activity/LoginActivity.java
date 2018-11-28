@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.gx.tianba.R;
-import com.gx.tianba.bean.Login;
+import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.login.presenter.LoginPresenter;
 import com.gx.tianba.login.view.ILoginView;
 import com.gx.tianba.util.ButtonUtil;
@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogin:
                 //如果不是快速点击按钮的话才登录
                 if (!ButtonUtil.ifFastClick()){
-                    bar.setVisibility(View.VISIBLE);
                     submit();
                 }
                 break;

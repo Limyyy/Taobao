@@ -1,6 +1,6 @@
 package com.gx.tianba.login.view;
 
-import com.gx.tianba.bean.Login;
+import com.gx.tianba.login.bean.Login;
 
 public interface ILoginView {
     void showLoading();
