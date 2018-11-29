@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <TextView
-        android:id="@+id/seller_name"
+        android:id="@+id/shop_cart_name"
         android:textSize="24sp"
         android:text="26sp"
         android:textColor="#c9b322"
@@ -15,7 +15,7 @@
         />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/seller_recyclerview"
+        android:id="@+id/shop_cart_recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seller_name"

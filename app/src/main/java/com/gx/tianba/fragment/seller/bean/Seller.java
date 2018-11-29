@@ -197,6 +197,24 @@ public class Seller {
             public void setTitle(String title) {
                 this.title = title;
             }
+
+            @Override
+            public String toString() {
+                return "ListBean{" +
+                        "bargainPrice=" + bargainPrice +
+                        ", createtime='" + createtime + '\'' +
+                        ", detailUrl='" + detailUrl + '\'' +
+                        ", images='" + images + '\'' +
+                        ", num=" + num +
+                        ", pid=" + pid +
+                        ", price=" + price +
+                        ", pscid=" + pscid +
+                        ", selected=" + selected +
+                        ", sellerid=" + sellerid +
+                        ", subhead='" + subhead + '\'' +
+                        ", title='" + title + '\'' +
+                        '}';
+            }
         }
     }
 }

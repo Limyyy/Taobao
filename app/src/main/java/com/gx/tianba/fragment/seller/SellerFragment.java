@@ -18,6 +18,9 @@ import com.gx.tianba.fragment.seller.presenter.SellerPresenter;
 import com.gx.tianba.fragment.seller.view.ISeller;
 import com.gx.tianba.util.net.HttpUrl;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +32,9 @@ public class SellerFragment extends Fragment implements ISeller {
     private TextView submit_shop_cart;
     private SellerPresenter sellerPresenter;
     private MainSellerAdapter mainSellerAdapter;
+    private List<Seller.DataBean> list_all=new ArrayList<>();
+    private Seller.DataBean dataBean=new Seller.DataBean();
+    private  List<Seller.DataBean.ListBean> listBeans=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +46,13 @@ public class SellerFragment extends Fragment implements ISeller {
         sellerPresenter = new SellerPresenter(this);
         sellerPresenter.showAllGoods(HttpUrl.SHOPCART_URL);
         isSeleckAll();
-
+        //选中的加入购物车
+        submit_shop_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitShopCart();
+            }
+        });
         return view;
     }
     @Override
@@ -97,6 +109,35 @@ public class SellerFragment extends Fragment implements ISeller {
         else {
             seller_checkall.setButtonDrawable(R.drawable.ic_check_circle_black_24dp);
         }
+    }
+    //加入购物车
+    public void submitShopCart(){
+        List<Seller.DataBean> data = mainSellerAdapter.getData();
+        for (int i = 0; i < data.size(); i++) {
+            Seller.DataBean dataBean = data.get(i);
+            List<Seller.DataBean.ListBean> list1 = dataBean.getList();
+            for (int i1 = 0; i1 < list1.size(); i1++) {
+                Seller.DataBean.ListBean listBean = list1.get(i1);
+                //选中的话加进去集合
+                if (listBean.getSelected()==1){
+                    listBeans.add(listBean);
+                    dataBean.setList(listBeans);
+                    list_all.add(dataBean);
+                }
+                else {
+
+                }
+            }
+        }
+        if (list_all.size()!=0){
+            EventBus.getDefault().post(list_all);
+            Toast.makeText(getActivity(),"加入购物车成功，请去购物车查看",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(getActivity(),"请选择要添加到购物车的商品",Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 }
