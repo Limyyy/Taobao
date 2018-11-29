@@ -14,7 +14,7 @@ import com.gx.tianba.R;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.login.presenter.LoginPresenter;
 import com.gx.tianba.login.view.ILoginView;
-import com.gx.tianba.seller.activity.SellerActivity;
+import com.gx.tianba.fragment.seller.activity.SellerActivity;
 import com.gx.tianba.util.ButtonUtil;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ILoginView {

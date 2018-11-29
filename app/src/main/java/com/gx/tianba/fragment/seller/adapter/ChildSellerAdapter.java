@@ -1,4 +1,4 @@
-package com.gx.tianba.seller.adapter;
+package com.gx.tianba.fragment.seller.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gx.tianba.R;
-import com.gx.tianba.seller.bean.Seller;
+import com.gx.tianba.fragment.seller.bean.Seller;
 import com.gx.tianba.util.fresco.FrescoUtil;
 
 import java.util.List;

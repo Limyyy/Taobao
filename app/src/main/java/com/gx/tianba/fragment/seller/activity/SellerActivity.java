@@ -1,4 +1,4 @@
-package com.gx.tianba.seller.activity;
+package com.gx.tianba.fragment.seller.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.gx.tianba.R;
-import com.gx.tianba.seller.adapter.MainSellerAdapter;
-import com.gx.tianba.seller.bean.Seller;
-import com.gx.tianba.seller.presenter.SellerPresenter;
-import com.gx.tianba.seller.view.ISeller;
+import com.gx.tianba.fragment.seller.adapter.MainSellerAdapter;
+import com.gx.tianba.fragment.seller.bean.Seller;
+import com.gx.tianba.fragment.seller.presenter.SellerPresenter;
+import com.gx.tianba.fragment.seller.view.ISeller;
 import com.gx.tianba.util.net.HttpUrl;
 
 import java.util.List;

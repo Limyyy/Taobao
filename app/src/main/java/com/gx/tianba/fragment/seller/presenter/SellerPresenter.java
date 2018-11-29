@@ -1,7 +1,7 @@
-package com.gx.tianba.seller.presenter;
+package com.gx.tianba.fragment.seller.presenter;
 
-import com.gx.tianba.seller.modle.SellerModel;
-import com.gx.tianba.seller.view.ISeller;
+import com.gx.tianba.fragment.seller.modle.SellerModel;
+import com.gx.tianba.fragment.seller.view.ISeller;
 
 public class SellerPresenter {
     ISeller iSeller;

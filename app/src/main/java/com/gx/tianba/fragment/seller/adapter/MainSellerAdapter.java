@@ -1,16 +1,15 @@
-package com.gx.tianba.seller.adapter;
+package com.gx.tianba.fragment.seller.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gx.tianba.R;
-import com.gx.tianba.seller.bean.Seller;
+import com.gx.tianba.fragment.seller.bean.Seller;
 
 import java.util.List;
 

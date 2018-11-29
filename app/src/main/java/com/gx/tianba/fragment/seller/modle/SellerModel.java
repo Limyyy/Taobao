@@ -1,4 +1,4 @@
-package com.gx.tianba.seller.modle;
+package com.gx.tianba.fragment.seller.modle;
 
 import com.gx.tianba.util.net.OkHttpUtils;
 

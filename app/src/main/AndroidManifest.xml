@@ -35,11 +35,11 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".seller.activity.SellerActivity"
+            android:name=".fragment.seller.activity.SellerActivity"
             android:label="@string/title_activity_shop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".shopcart.activity.ShopCartActivity"
+            android:name=".fragment.shopcart.activity.ShopCartActivity"
             android:label="@string/title_activity_shop_car"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

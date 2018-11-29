@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".seller.activity.SellerActivity">
+    tools:context=".fragment.seller.activity.SellerActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">

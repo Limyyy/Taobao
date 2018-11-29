@@ -1,4 +1,4 @@
-package com.gx.tianba.seller.bean;
+package com.gx.tianba.fragment.seller.bean;
 
 import java.util.List;
 

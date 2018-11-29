@@ -1,4 +1,4 @@
-package com.gx.tianba.shopcart.activity;
+package com.gx.tianba.fragment.shopcart.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

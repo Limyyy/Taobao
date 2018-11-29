@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".shopcart.activity.ShopCartActivity">
+    tools:context=".fragment.shopcart.activity.ShopCartActivity">
     <RelativeLayout
         android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
