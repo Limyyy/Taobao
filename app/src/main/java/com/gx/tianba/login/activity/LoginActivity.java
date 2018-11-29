@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.gx.tianba.MainActivity;
 import com.gx.tianba.R;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.login.presenter.LoginPresenter;
@@ -102,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void run() {
                 Toast.makeText(LoginActivity.this,""+msg,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, SellerActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
