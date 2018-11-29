@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.seller.bean.Seller;
@@ -17,6 +18,11 @@ public class MainSellerAdapter extends RecyclerView.Adapter<MainSellerAdapter.Ma
 
     private Context context;
     private List<Seller.DataBean> data;
+    private ChildSellerAdapter childSellerAdapter;
+
+    public List<Seller.DataBean> getData() {
+        return data;
+    }
 
     public MainSellerAdapter(Context context, List<Seller.DataBean> data) {
         this.context = context;
@@ -38,9 +44,18 @@ public class MainSellerAdapter extends RecyclerView.Adapter<MainSellerAdapter.Ma
         List<Seller.DataBean.ListBean> list = dataBean.getList();
         mainSellerViewHolder.sellername.setText(""+sellerName);
         //商品列表
-        ChildSellerAdapter childSellerAdapter = new ChildSellerAdapter(context, list);
+        childSellerAdapter = new ChildSellerAdapter(context, list);
         mainSellerViewHolder.childrcy.setLayoutManager(new LinearLayoutManager(context));
         mainSellerViewHolder.childrcy.setAdapter(childSellerAdapter);
+        childSellerAdapter.SetChildCheckOnClickListner(new ChildSellerAdapter.CallBack() {
+            @Override
+            public void getGroupAndChild(int Group, int child,int isCheck) {
+                //Toast.makeText(context,"组为："+Group+"子为："+child+"是否选中"+isCheck,Toast.LENGTH_SHORT).show();
+                List<Seller.DataBean> data1 = getData();
+                data1.get(Group).getList().get(child).setSelected(isCheck);
+                notifyDataSetChanged();
+            }
+        });
     }
 
 

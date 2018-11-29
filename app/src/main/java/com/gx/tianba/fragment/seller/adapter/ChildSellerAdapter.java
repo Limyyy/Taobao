@@ -17,7 +17,7 @@ import com.gx.tianba.util.fresco.FrescoUtil;
 import java.util.List;
 
 public class ChildSellerAdapter extends RecyclerView.Adapter<ChildSellerAdapter.ChildSellerViewHolder> {
-
+    private CallBack callBack;
     private Context context;
     private List<Seller.DataBean.ListBean> list;
 
@@ -34,8 +34,8 @@ public class ChildSellerAdapter extends RecyclerView.Adapter<ChildSellerAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChildSellerViewHolder childSellerViewHolder, int i) {
-        Seller.DataBean.ListBean listBean = list.get(i);
+    public void onBindViewHolder(@NonNull final ChildSellerViewHolder childSellerViewHolder, int i) {
+        final Seller.DataBean.ListBean listBean = list.get(i);
         //判断是否为空
         if (listBean.getTitle()!=null){
             //设置商品名称
@@ -62,8 +62,24 @@ public class ChildSellerAdapter extends RecyclerView.Adapter<ChildSellerAdapter.
             childSellerViewHolder.childcheck.setButtonDrawable(R.drawable.ic_check_circle_black_24dp_yes);
         }
         else {
-            childSellerViewHolder.childcheck.setChecked(false);
+            childSellerViewHolder.childcheck.setButtonDrawable(R.drawable.ic_check_circle_black_24dp);
         }
+        //传回去组索引和子索引
+        childSellerViewHolder.childcheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int layoutPosition = childSellerViewHolder.getLayoutPosition();
+                int sellerid = listBean.getSellerid();
+                if (listBean.getSelected()==0){
+                    callBack.getGroupAndChild(sellerid-1,layoutPosition,1);
+                }
+                else {
+                    callBack.getGroupAndChild(sellerid-1,layoutPosition,0);
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -84,5 +100,12 @@ public class ChildSellerAdapter extends RecyclerView.Adapter<ChildSellerAdapter.
             childprice=itemView.findViewById(R.id.childprice);
 
         }
+    }
+    public void  SetChildCheckOnClickListner(CallBack callBack1){
+        this.callBack=callBack1;
+    }
+
+    public interface CallBack{
+        void getGroupAndChild(int Group,int child,int isCheck);
     }
 }
