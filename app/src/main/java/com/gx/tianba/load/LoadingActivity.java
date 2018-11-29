@@ -7,11 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.gx.tianba.MainActivity;
 import com.gx.tianba.R;
 import com.gx.tianba.load.adapter.LoadingPagerAdapter;
 import com.gx.tianba.login.activity.LoginActivity;
-import com.gx.tianba.util.Constant;
+import com.gx.tianba.util.constant.Constant;
 
 import java.util.ArrayList;
 import java.util.List;

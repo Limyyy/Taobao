@@ -1,4 +1,4 @@
-package com.gx.tianba.util;
+package com.gx.tianba.util.net;
 
 
 import android.util.Log;

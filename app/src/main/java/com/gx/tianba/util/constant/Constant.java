@@ -1,4 +1,4 @@
-package com.gx.tianba.util;
+package com.gx.tianba.util.constant;
 
 public interface Constant {
     public String SP_NAME="sp_name";

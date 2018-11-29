@@ -121,7 +121,7 @@
             android:paddingRight="30dp"
             android:paddingTop="10dp"
             android:text="去结算"
-            android:textColor="#5E9BF0" />
+            android:textColor="#fff" />
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.gx.tianba.login.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import com.gx.tianba.R;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.login.presenter.LoginPresenter;
 import com.gx.tianba.login.view.ILoginView;
+import com.gx.tianba.seller.activity.SellerActivity;
 import com.gx.tianba.util.ButtonUtil;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ILoginView {
@@ -100,6 +102,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void run() {
                 Toast.makeText(LoginActivity.this,""+msg,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, SellerActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

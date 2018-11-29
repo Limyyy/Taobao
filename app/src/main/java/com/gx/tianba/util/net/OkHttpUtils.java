@@ -1,4 +1,4 @@
-package com.gx.tianba.util;
+package com.gx.tianba.util.net;
 
 import com.google.gson.Gson;
 import com.gx.tianba.base.BaseRequest;

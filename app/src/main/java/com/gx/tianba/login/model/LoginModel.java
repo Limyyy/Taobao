@@ -2,8 +2,8 @@ package com.gx.tianba.login.model;
 
 import com.google.gson.Gson;
 import com.gx.tianba.login.bean.Login;
-import com.gx.tianba.util.HttpUrl;
-import com.gx.tianba.util.OkHttpUtils;
+import com.gx.tianba.util.net.HttpUrl;
+import com.gx.tianba.util.net.OkHttpUtils;
 
 import java.io.IOException;
 

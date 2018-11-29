@@ -35,7 +35,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".shop.activity.ShopActivity"
+            android:name=".seller.activity.SellerActivity"
             android:label="@string/title_activity_shop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
