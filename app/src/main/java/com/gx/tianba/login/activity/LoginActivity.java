@@ -52,10 +52,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edName.setText(name);
             edPwd.setText(password);
         }
-        //如果没有登录过则去登录
-        else {
-            submit();
-        }
     }
 
     private void initView() {
@@ -76,6 +72,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnRegister:
+                //跳转到注册页面
+                
+
                 break;
             case R.id.btnLogin:
                 //如果不是快速点击按钮的话才登录
