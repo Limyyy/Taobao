@@ -14,6 +14,7 @@ public class LoginPresenter {
     }
 
     public void login(String mobile,String password){
+        //使进度条显示
         loginView.showLoading();
         model.login(mobile, password, new LoginModel.loginCallBack() {
             @Override

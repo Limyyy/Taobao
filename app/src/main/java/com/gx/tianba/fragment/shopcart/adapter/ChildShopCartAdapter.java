@@ -91,8 +91,11 @@ public class ChildShopCartAdapter extends RecyclerView.Adapter<ChildShopCartAdap
                 num++;
                 //再设置数量
                 listBean.setNum(num);
+                //刷新适配器的数据
+                notifyDataSetChanged();
                 //使用监听返回去
                 click.Listner();
+
             }
         });
         //点击数量减少通过接口回调变换总价
@@ -105,11 +108,17 @@ public class ChildShopCartAdapter extends RecyclerView.Adapter<ChildShopCartAdap
                 if (num==1){
                     Toast.makeText(context,"不能再减了！！！",Toast.LENGTH_SHORT).show();
                     listBean.setNum(num);
+                    //刷新适配器的数据
+                    notifyDataSetChanged();
+                    //使用监听返回去
                     click.Listner();
                 }
                 else {
                     num--;
                     listBean.setNum(num);
+                    //刷新适配器的数据
+                    notifyDataSetChanged();
+                    //使用监听返回去
                     click.Listner();
                 }
             }
