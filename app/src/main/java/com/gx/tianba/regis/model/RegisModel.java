@@ -12,7 +12,13 @@ import okhttp3.Response;
 public class RegisModel {
 
     public void presenterModel(String username,String password,CallBack callBack){
-        OkHttpUtils.enqueueGet(new Callback() {
+        if (username.equals("123")&&password.equals("123")){
+            callBack.backData("注册成功",1);
+        }
+        else{
+            callBack.backData("注册失败",0);
+        }
+        /*OkHttpUtils.enqueueGet(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -22,10 +28,10 @@ public class RegisModel {
             public void onResponse(Call call, Response response) throws IOException {
 
             }
-        },HttpUrl.REGISTER);
+        },HttpUrl.REGISTER);*/
     }
 
     public interface CallBack{
-        void backData(String msg);
+        void backData(String msg,int code);
     }
 }

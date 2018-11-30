@@ -30,6 +30,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private String sex;
     private String age;
     private String mobile;
+    private Button yesremeber;
+    private Button noremeber;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.regis_button:
-
+                submit();
                 break;
         }
     }
@@ -91,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        regisPresenter.presenterRegister(username,password);
     }
 
     //解决mvp内存泄漏
@@ -102,38 +105,44 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void regisSuccess(String msg) {
+    public void regisSuccess(final String msg, final int code) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //注册成功后弹出对话框
-                AlertDialog.Builder builder=new AlertDialog.Builder(RegisterActivity.this);
-                View view = View.inflate(RegisterActivity.this, R.layout.regis_is_remeber_alert, null);
-                builder.setView(view);
-                final AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-                Button yesremeber= view.findViewById(R.id.yes_remeber);
-                Button noremeber= view.findViewById(R.id.yes_remeber);
-                //记住的话给登录页面返回值
-                yesremeber.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //关闭弹框
-                        alertDialog.dismiss();
-                        Intent intent = getIntent();
-                        intent.putExtra("username",username);
-                        intent.putExtra("password",password);
-                        intent.putExtra("regisischeck",true);
-                        setResult(2,intent);
-                    }
-                });
-                //不记住的话直接关闭弹框
-                noremeber.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
+                if (code==0){
+                    Toast.makeText(RegisterActivity.this,""+msg+",请重新注册",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //注册成功后弹出对话框
+                    AlertDialog.Builder builder=new AlertDialog.Builder(RegisterActivity.this);
+                    View view = View.inflate(RegisterActivity.this, R.layout.regis_is_remeber_alert, null);
+                    builder.setView(view);
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                    yesremeber = view.findViewById(R.id.yes_remeber);
+                    noremeber = view.findViewById(R.id.no_remeber);
+                    //记住的话给登录页面返回值
+                }
+            }
+        });
+        yesremeber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //关闭弹框
+                alertDialog.dismiss();
+                Intent intent = new Intent();
+                intent.putExtra("username",username);
+                intent.putExtra("password",password);
+                intent.putExtra("regisischeck",true);
+                setResult(2,intent);
+                finish(); //结束当前的activity
+            }
+        });
+        //不记住的话直接关闭弹框
+        noremeber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
             }
         });
     }
