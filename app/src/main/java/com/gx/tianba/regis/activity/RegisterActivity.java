@@ -1,6 +1,8 @@
 package com.gx.tianba.regis.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,6 +25,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText regis_edit_mobile;
     private Button regis_button;
     private RegisPresenter regisPresenter;
+    private String username;
+    private String password;
+    private String sex;
+    private String age;
+    private String mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,31 +62,31 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void submit() {
         // validate
-        String username = regis_edit_username.getText().toString().trim();
+        username = regis_edit_username.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String password = regis_edit_password.getText().toString().trim();
+        password = regis_edit_password.getText().toString().trim();
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String sex = regis_edit_sex.getText().toString().trim();
+        sex = regis_edit_sex.getText().toString().trim();
         if (TextUtils.isEmpty(sex)) {
             Toast.makeText(this, "请输入性别", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String age = regis_edit_age.getText().toString().trim();
+        age = regis_edit_age.getText().toString().trim();
         if (TextUtils.isEmpty(age)) {
             Toast.makeText(this, "请输入年龄", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String mobile = regis_edit_mobile.getText().toString().trim();
+        mobile = regis_edit_mobile.getText().toString().trim();
         if (TextUtils.isEmpty(mobile)) {
             Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
             return;
@@ -99,7 +106,34 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                //注册成功后弹出对话框
+                AlertDialog.Builder builder=new AlertDialog.Builder(RegisterActivity.this);
+                View view = View.inflate(RegisterActivity.this, R.layout.regis_is_remeber_alert, null);
+                builder.setView(view);
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                Button yesremeber= view.findViewById(R.id.yes_remeber);
+                Button noremeber= view.findViewById(R.id.yes_remeber);
+                //记住的话给登录页面返回值
+                yesremeber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //关闭弹框
+                        alertDialog.dismiss();
+                        Intent intent = getIntent();
+                        intent.putExtra("username",username);
+                        intent.putExtra("password",password);
+                        intent.putExtra("regisischeck",true);
+                        setResult(2,intent);
+                    }
+                });
+                //不记住的话直接关闭弹框
+                noremeber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
             }
         });
     }
