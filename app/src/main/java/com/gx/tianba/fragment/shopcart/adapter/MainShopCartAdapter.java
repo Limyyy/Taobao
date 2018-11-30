@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gx.tianba.R;
-import com.gx.tianba.fragment.seller.adapter.ChildSellerAdapter;
 import com.gx.tianba.fragment.seller.bean.Seller;
 
 import java.util.List;
@@ -18,8 +17,10 @@ public class MainShopCartAdapter extends RecyclerView.Adapter<MainShopCartAdapte
 
     private Context context;
     private List<Seller.DataBean> data;
-    private ChildSellerAdapter childSellerAdapter;
+    private ChildShopCartAdapter childSellerAdapter;
+    private setDoublePrice setDoublePrice;
 
+    //得到购物车里面的数据
     public List<Seller.DataBean> getData() {
         return data;
     }
@@ -44,16 +45,19 @@ public class MainShopCartAdapter extends RecyclerView.Adapter<MainShopCartAdapte
         List<Seller.DataBean.ListBean> list = dataBean.getList();
         mainSellerViewHolder.shopcartname.setText(""+sellerName);
         //商品列表
-        childSellerAdapter = new ChildSellerAdapter(context, list);
+        childSellerAdapter = new ChildShopCartAdapter(context, list);
         mainSellerViewHolder.childrcy.setLayoutManager(new LinearLayoutManager(context));
         mainSellerViewHolder.childrcy.setAdapter(childSellerAdapter);
-        childSellerAdapter.SetChildCheckOnClickListner(new ChildSellerAdapter.CallBack() {
+
+        //单个点击监听
+        childSellerAdapter.setOnChildShopCartAdapter(new ChildShopCartAdapter.Click() {
             @Override
-            public void getGroupAndChild(int Group, int child,int isCheck) {
-                //Toast.makeText(context,"组为："+Group+"子为："+child+"是否选中"+isCheck,Toast.LENGTH_SHORT).show();
-                List<Seller.DataBean> data1 = getData();
-                data1.get(Group).getList().get(child).setSelected(isCheck);
-                notifyDataSetChanged();
+            public void Listner() {
+                double v = sumAllPrice();
+                //接口回调给展示页面的总价格
+                setDoublePrice.setPrice(v);
+                Boolean selectAll = isSelectAll();
+                setDoublePrice.isSelAll(selectAll);
             }
         });
     }
@@ -72,6 +76,54 @@ public class MainShopCartAdapter extends RecyclerView.Adapter<MainShopCartAdapte
             super(itemView);
             shopcartname= itemView.findViewById(R.id.shop_cart_name);
             childrcy=itemView.findViewById(R.id.shop_cart_recyclerview);
+        }
+    }
+    //计算购物车的总价
+    public double sumAllPrice(){
+        double sumprice=0;
+        List<Seller.DataBean> data = getData();
+        for (int i = 0; i < data.size(); i++) {
+            Seller.DataBean dataBean = data.get(i);
+            List<Seller.DataBean.ListBean> list = dataBean.getList();
+            for (int i1 = 0; i1 < list.size(); i1++) {
+                Seller.DataBean.ListBean listBean = list.get(i1);
+                if (listBean.getSelected()==1){
+                    double price = listBean.getPrice();
+                    int num = listBean.getNum();
+                    sumprice=sumprice+(price*num);
+                }
+            }
+        }
+        return sumprice;
+    }
+    public void GetAllPrice(setDoublePrice setDoublePrice1){
+        this.setDoublePrice=setDoublePrice1;
+    }
+
+    public interface setDoublePrice{
+        void setPrice(double allprice);
+        void isSelAll(boolean b);
+    }
+    //判断单个点击过后是不是还是全选  使用接口回调
+    //集合中的数据  和  选中的个数
+    public Boolean  isSelectAll(){
+        int j=0,jj=0;
+        for (int i = 0; i < data.size(); i++) {
+            Seller.DataBean dataBean = data.get(i);
+            List<Seller.DataBean.ListBean> list = dataBean.getList();
+            for (int i1 = 0; i1 < list.size(); i1++) {
+                j++;
+                Seller.DataBean.ListBean listBean = list.get(i1);
+                if (listBean.getSelected()==1){
+                    jj++;
+                }
+            }
+        }
+        if (j==jj){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

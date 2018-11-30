@@ -33,8 +33,8 @@ public class SellerFragment extends Fragment implements ISeller {
     private SellerPresenter sellerPresenter;
     private MainSellerAdapter mainSellerAdapter;
     private List<Seller.DataBean> list_all=new ArrayList<>();
-    private Seller.DataBean dataBean=new Seller.DataBean();
-    private  List<Seller.DataBean.ListBean> listBeans=new ArrayList<>();
+    private Seller.DataBean dataBeans;
+    private  List<Seller.DataBean.ListBean> listBeans;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class SellerFragment extends Fragment implements ISeller {
         });
         return view;
     }
+    //回调回来的数据
     @Override
     public void backData(final String data) {
        getActivity().runOnUiThread(new Runnable() {
@@ -65,6 +66,15 @@ public class SellerFragment extends Fragment implements ISeller {
                 if (seller.getCode().equals("0")){
                     List<Seller.DataBean> data1 = seller.getData();
                     data1.remove(0);
+                    //把所有的多选框设置为0
+                    for (int i = 0; i < data1.size(); i++) {
+                        Seller.DataBean dataBean = data1.get(i);
+                        List<Seller.DataBean.ListBean> list1 = dataBean.getList();
+                        for (int i1 = 0; i1 < list1.size(); i1++) {
+                            Seller.DataBean.ListBean listBean = list1.get(i1);
+                            listBean.setSelected(0);
+                        }
+                    }
                     mainSellerAdapter = new MainSellerAdapter(getActivity(),data1);
                     rlv_seller.setLayoutManager(new LinearLayoutManager(getActivity()));
                     rlv_seller.setAdapter(mainSellerAdapter);
@@ -116,17 +126,45 @@ public class SellerFragment extends Fragment implements ISeller {
         for (int i = 0; i < data.size(); i++) {
             Seller.DataBean dataBean = data.get(i);
             List<Seller.DataBean.ListBean> list1 = dataBean.getList();
+            //加进去一次以后要再次初始化 要不然会保留以前加入的数据
+            dataBeans= new Seller.DataBean();
+            listBeans=new ArrayList<>();
             for (int i1 = 0; i1 < list1.size(); i1++) {
                 Seller.DataBean.ListBean listBean = list1.get(i1);
                 //选中的话加进去集合
                 if (listBean.getSelected()==1){
                     listBeans.add(listBean);
-                    dataBean.setList(listBeans);
-                    list_all.add(dataBean);
+                    //判断是否第一次加入购物车
+                    /*if (list_all.size()==0){
+                        listBeans.add(listBean);
+                    }
+                    else {
+                        //去查看是否已经加入购物车
+                        //已经加入再次加入的话数量加1 如果没有加入的话加入
+                        for (int iii = 0; iii < list_all.size(); iii++) {
+                            Seller.DataBean dataBean2 = list_all.get(iii);
+                            List<Seller.DataBean.ListBean> list22 = dataBean2.getList();
+                            for (int i11 = 0; i11 < list22.size(); i11++) {
+                                Seller.DataBean.ListBean listBean1 = list22.get(i11);
+                                //根据pid来判断
+                                if (listBean.getPid()==listBean1.getPid()){
+                                    //相等的话说明已经有这个商品了设置原来的数据数量加1
+                                    int num = listBean1.getNum();
+                                    listBean1.setNum(num+1);
+                                }
+                                else {
+                                    listBeans.add(listBean);
+                                }
+                            }
+                        }
+                    }*/
                 }
-                else {
-
-                }
+            }
+            if (listBeans.size()!=0){
+                dataBeans.setSellerid(dataBean.getSellerid());
+                dataBeans.setSellerName(dataBean.getSellerName());
+                dataBeans.setList(listBeans);
+                list_all.add(dataBeans);
             }
         }
         if (list_all.size()!=0){
@@ -136,8 +174,7 @@ public class SellerFragment extends Fragment implements ISeller {
         else {
             Toast.makeText(getActivity(),"请选择要添加到购物车的商品",Toast.LENGTH_SHORT).show();
         }
-
-
     }
+
 
 }

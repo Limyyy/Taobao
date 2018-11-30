@@ -60,7 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:button="@null"
-            android:drawableLeft="@drawable/ic_check_circle_black_24dp"
             android:drawablePadding="5dp"
             android:padding="10dp"
             android:text="全选" />
