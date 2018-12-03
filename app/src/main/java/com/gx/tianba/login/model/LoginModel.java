@@ -1,6 +1,9 @@
 package com.gx.tianba.login.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.gx.tianba.base.BaseRequest;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.net.HttpUrl;
 import com.gx.tianba.util.net.OkHttpUtils;
@@ -13,10 +16,14 @@ import okhttp3.Response;
 
 public class LoginModel {
     public void login(String mobile,String password,final loginCallBack loginCallBack){
-        OkHttpUtils.enqueueGet(new Callback() {
+        String url = "http://172.17.8.100/small/user/v1/login?phone="+mobile+"&pwd="+password;
+        BaseRequest request=new BaseRequest();
+        request.phone=mobile;
+        request.pwd=password;
+        OkHttpUtils.enqueuePost(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                loginCallBack.onConnectionFailer("连接服务器超时");
+
             }
 
             @Override
@@ -24,20 +31,17 @@ public class LoginModel {
                 int code = response.code();
                 if (code==200){
                     Gson gson=new Gson();
-                    Login login = gson.fromJson(response.body().string(),Login.class);
-                    if (login.getCode().equals("0")){
+                    Login login = gson.fromJson(response.body().string(), Login.class);
+                    if (login.getStatus().equals("0000")){
                         loginCallBack.onSuccess(login);
                     }
                     else {
-                        String msg = login.getMsg();
+                        String msg = login.getMessage();
                         loginCallBack.onFailer(msg);
                     }
                 }
-                else {
-
-                }
             }
-        },HttpUrl.LOGIN_URL+"?mobile="+mobile+"&password="+password);
+        },url,new BaseRequest());
     }
 
     public interface loginCallBack{
