@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gx.tianba.R;
@@ -18,12 +19,9 @@ import com.gx.tianba.regis.view.IRegis;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener,IRegis {
 
-    private ImageView regis_back;
+    private TextView regis_back;
     private EditText regis_edit_username;
     private EditText regis_edit_password;
-    private EditText regis_edit_sex;
-    private EditText regis_edit_age;
-    private EditText regis_edit_mobile;
     private Button regis_button;
     private RegisPresenter regisPresenter;
     private String username;
@@ -34,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button yesremeber;
     private Button noremeber;
     private AlertDialog alertDialog;
+    private EditText regis_edit_yzm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +44,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        regis_back = (ImageView) findViewById(R.id.regis_back);
+        regis_back = (TextView) findViewById(R.id.regis_back);
         regis_edit_username = (EditText) findViewById(R.id.regis_edit_username);
         regis_edit_password = (EditText) findViewById(R.id.regis_edit_password);
-        regis_edit_sex = (EditText) findViewById(R.id.regis_edit_sex);
-        regis_edit_age = (EditText) findViewById(R.id.regis_edit_age);
-        regis_edit_mobile = (EditText) findViewById(R.id.regis_edit_mobile);
-        regis_button = (Button) findViewById(R.id.regis_button);
+        regis_button=findViewById(R.id.regis_button);
+        regis_edit_yzm = findViewById(R.id.regis_edit_yzm);
         regis_button.setOnClickListener(this);
         regis_back.setOnClickListener(this);
     }
@@ -83,23 +80,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        sex = regis_edit_sex.getText().toString().trim();
-        if (TextUtils.isEmpty(sex)) {
-            Toast.makeText(this, "请输入性别", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        age = regis_edit_age.getText().toString().trim();
-        if (TextUtils.isEmpty(age)) {
-            Toast.makeText(this, "请输入年龄", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        mobile = regis_edit_mobile.getText().toString().trim();
-        if (TextUtils.isEmpty(mobile)) {
-            Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
-            return;
-        }
         regisPresenter.presenterRegister(username,password);
     }
 
@@ -115,10 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (code==0){
-                    Toast.makeText(RegisterActivity.this,""+msg+",请重新注册",Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    //Toast.makeText(RegisterActivity.this,""+msg,Toast.LENGTH_SHORT).show();
                     //注册成功后弹出对话框
                     AlertDialog.Builder builder=new AlertDialog.Builder(RegisterActivity.this);
                     View view = View.inflate(RegisterActivity.this, R.layout.regis_is_remeber_alert, null);
@@ -128,27 +105,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     yesremeber = view.findViewById(R.id.yes_remeber);
                     noremeber = view.findViewById(R.id.no_remeber);
                     //记住的话给登录页面返回值
+                yesremeber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //关闭弹框
+                        alertDialog.dismiss();
+                        Intent intent = new Intent();
+                        intent.putExtra("username",username);
+                        intent.putExtra("password",password);
+                        intent.putExtra("regisischeck",true);
+                        setResult(2,intent);
+                        finish(); //结束当前的activity
+                    }
+                });
+                //不记住的话直接关闭弹框
+                noremeber.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
                 }
-            }
         });
-        yesremeber.setOnClickListener(new View.OnClickListener() {
+
+    }
+
+    @Override
+    public void regisFailer(final String msg) {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onClick(View v) {
-                //关闭弹框
-                alertDialog.dismiss();
-                Intent intent = new Intent();
-                intent.putExtra("username",username);
-                intent.putExtra("password",password);
-                intent.putExtra("regisischeck",true);
-                setResult(2,intent);
-                finish(); //结束当前的activity
-            }
-        });
-        //不记住的话直接关闭弹框
-        noremeber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
+            public void run() {
+                Toast.makeText(RegisterActivity.this,""+msg,Toast.LENGTH_SHORT).show();
             }
         });
     }
