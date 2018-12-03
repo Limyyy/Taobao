@@ -1,14 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="#dfdddd"
     tools:context=".fragment.options.OptionsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我的" />
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/option_back"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:contentDescription="后退"
+            android:layout_centerVertical="true"
+            android:layout_width="16dp"
+            android:layout_height="16dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="我的信息"
+            android:textColor="#232121"
+            android:textSize="16dp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/option_image"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="140dp"
+            android:src="@mipmap/pic"
+            android:layout_marginBottom="15dp"
+            android:layout_height="140dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="昵称："
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/option_name"
+                    android:text="从 良"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="昵称："
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/option_sex"
+                    android:text="男"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="36dp">
+        <TextView
+            android:id="@+id/option_details"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="14sp"
+            android:text="个人信息"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:focusable="false"
+            android:src="@drawable/to_right_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="36dp">
+        <TextView
+            android:id="@+id/option_uppassword"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textSize="15sp"
+            android:text="变更密码"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:focusable="false"
+            android:src="@drawable/to_right_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="36dp">
+
+        <TextView
+            android:id="@+id/option_clear_cache"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:paddingLeft="10dp"
+            android:text="清除缓存"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:focusable="false"
+            android:src="@drawable/to_right_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="36dp">
+        <TextView
+            android:id="@+id/option_soft_gradle"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:text="软件升级"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:focusable="false"
+            android:src="@drawable/to_right_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="36dp">
+
+        <TextView
+            android:id="@+id/option_idea"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:text="意见反馈"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:focusable="false"
+            android:src="@drawable/to_right_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="36dp">
+        <TextView
+            android:id="@+id/option_about_weidu"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:text="关于维度"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:focusable="false"
+            android:src="@drawable/to_right_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:id="@+id/option_service_tel"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_height="36dp">
+        <TextView
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:text="客服电话：150-1074-6214"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:focusable="false"
+            android:src="@drawable/to_right_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

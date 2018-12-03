@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gx.tianba.R;
+import com.gx.tianba.login.activity.LoginActivity;
 import com.gx.tianba.regis.presenter.RegisPresenter;
 import com.gx.tianba.regis.view.IRegis;
 
@@ -52,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         regis_edit_mobile = (EditText) findViewById(R.id.regis_edit_mobile);
         regis_button = (Button) findViewById(R.id.regis_button);
         regis_button.setOnClickListener(this);
+        regis_back.setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +61,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.regis_button:
                 submit();
+                break;
+            case R.id.regis_back:
+                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                finish();
                 break;
         }
     }

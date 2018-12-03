@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#d1d0d0"
+    android:orientation="vertical"
+    android:layout_height="160dp">
+    <TextView
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:text="客服:150-1074-6214"
+        android:layout_width="match_parent"
+        android:paddingTop="15dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:layout_marginTop="1dp"
+        android:id="@+id/hit_service_tel"
+        android:text="拨打客服电话"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <TextView
+        android:id="@+id/cancle_hit_service_tel"
+        android:layout_marginTop="10dp"
+        android:text="取消"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>

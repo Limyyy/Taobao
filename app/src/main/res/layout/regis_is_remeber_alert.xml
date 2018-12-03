@@ -3,22 +3,34 @@
     android:layout_width="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:layout_height="wrap_content">
+    android:layout_height="200dp">
+    <TextView
+        android:textColor="#000"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:text="提 示"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#5655"></View>
     <TextView
         android:layout_weight="1"
         android:textSize="16dp"
         android:gravity="center"
-        android:text="注册成功!!!是否记
-        住本次注册的账号和密码?"
-
+        android:text="注册成功!!!\n是否记住本次注册的账号和密码?"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="180dp" />
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <android.support.v4.widget.Space
+            android:layout_width="40dp"
+            android:layout_height="wrap_content" />
         <Button
             android:text="yes"
             android:id="@+id/yes_remeber"
@@ -32,6 +44,9 @@
             android:text="no"
             android:id="@+id/no_remeber"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v4.widget.Space
+            android:layout_width="40dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>
