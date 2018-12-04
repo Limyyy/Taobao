@@ -26,13 +26,4 @@ public class ViewPagerAdapter extends android.support.v13.app.FragmentPagerAdapt
         return fragmentlists.size();
     }
 
-  /*  @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        return super.instantiateItem(container, position);
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
-    }*/
 }

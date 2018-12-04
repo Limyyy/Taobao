@@ -6,40 +6,110 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <!--<android.support.v4.view.ViewPager
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/menu_iamge"
+            android:layout_marginLeft="25dp"
+            android:background="@mipmap/common_nav_btn_menu_n_xxhdpi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v4.widget.Space
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/search_iamge"
+            android:layout_marginRight="25dp"
+            android:background="@mipmap/common_nav_btn_search_n_xxhdpi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="1dp">
+        android:layout_alignParentBottom="true"
+        android:layout_height="90dp">
+        <View
+            android:background="#545455"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="80dp">
+            <android.support.v4.widget.Space
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/main_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@mipmap/common_tab_btn_home_s_xxhdpi" />
+            <android.support.v4.widget.Space
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/main_search"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/main_home"
+                android:background="@mipmap/common_tab_btn_circle_n_xxhdpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v4.widget.Space
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/main_shopping"
+                android:layout_marginBottom="8dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/main_search"
+                android:background="@mipmap/commom_tab_btn_shopping_cart_n_xxhdpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v4.widget.Space
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    </android.support.v4.view.ViewPager>-->
-    <FrameLayout
-        android:layout_weight="1"
-        android:id="@+id/frame"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"></FrameLayout>
-    <android.support.design.widget.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:tabSelectedTextColor="#f9b0d2"
-        android:id="@+id/tab"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-       >
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TabLayout>
+            <ImageView
+                android:id="@+id/main_list"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/main_shopping"
+                android:background="@mipmap/common_tab_btn_list_n_xxhdi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v4.widget.Space
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/main_my"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/main_list"
+                android:background="@mipmap/common_tab_btn_my_n_xxhdpi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v4.widget.Space
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </LinearLayout>

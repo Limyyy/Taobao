@@ -2,243 +2,104 @@ package com.gx.tianba.login.bean;
 
 public class Login {
 
+
     /**
-     * msg : 登录成功
-     * code : 0
-     * data : {"age":null,"appkey":"5cc790638034668b","appsecret":"DEE64AD9EE506CA2AA5A97191CD1FC9C","createtime":"2018-11-28T13:52:21","email":null,"fans":null,"follow":null,"gender":null,"icon":null,"latitude":null,"longitude":null,"mobile":"15010746214","money":null,"nickname":null,"password":"CC9A08B0EB9F02AFDA07D24BF9DFB0F3","praiseNum":null,"token":"320A60F253522240B87CDAC21051A73F","uid":21114,"userId":null,"username":"15010746214"}
+     * result : {"headPic":"http://172.17.8.100/images/small/head_pic/2018-11-21/20181121100733.jpg","nickName":"OP_8mY65","phone":"16619958760","sessionId":"154276714558512","sex":1,"userId":12}
+     * message : 登录成功
+     * status : 0000
      */
 
-    private String msg;
-    private String code;
-    private DataBean data;
+    private ResultBean result;
+    private String message;
+    private String status;
 
-    public String getMsg() {
-        return msg;
+    public ResultBean getResult() {
+        return result;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setResult(ResultBean result) {
+        this.result = result;
     }
 
-    public String getCode() {
-        return code;
+    public String getMessage() {
+        return message;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public DataBean getData() {
-        return data;
+    public String getStatus() {
+        return status;
     }
 
-    public void setData(DataBean data) {
-        this.data = data;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public static class DataBean {
+    public static class ResultBean {
         /**
-         * age : null
-         * appkey : 5cc790638034668b
-         * appsecret : DEE64AD9EE506CA2AA5A97191CD1FC9C
-         * createtime : 2018-11-28T13:52:21
-         * email : null
-         * fans : null
-         * follow : null
-         * gender : null
-         * icon : null
-         * latitude : null
-         * longitude : null
-         * mobile : 15010746214
-         * money : null
-         * nickname : null
-         * password : CC9A08B0EB9F02AFDA07D24BF9DFB0F3
-         * praiseNum : null
-         * token : 320A60F253522240B87CDAC21051A73F
-         * uid : 21114
-         * userId : null
-         * username : 15010746214
+         * headPic : http://172.17.8.100/images/small/head_pic/2018-11-21/20181121100733.jpg
+         * nickName : OP_8mY65
+         * phone : 16619958760
+         * sessionId : 154276714558512
+         * sex : 1
+         * userId : 12
          */
 
-        private Object age;
-        private String appkey;
-        private String appsecret;
-        private String createtime;
-        private Object email;
-        private Object fans;
-        private Object follow;
-        private Object gender;
-        private Object icon;
-        private Object latitude;
-        private Object longitude;
-        private String mobile;
-        private Object money;
-        private Object nickname;
-        private String password;
-        private Object praiseNum;
-        private String token;
-        private int uid;
-        private Object userId;
-        private String username;
+        private String headPic;
+        private String nickName;
+        private String phone;
+        private String sessionId;
+        private int sex;
+        private int userId;
 
-        public Object getAge() {
-            return age;
+        public String getHeadPic() {
+            return headPic;
         }
 
-        public void setAge(Object age) {
-            this.age = age;
+        public void setHeadPic(String headPic) {
+            this.headPic = headPic;
         }
 
-        public String getAppkey() {
-            return appkey;
+        public String getNickName() {
+            return nickName;
         }
 
-        public void setAppkey(String appkey) {
-            this.appkey = appkey;
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
         }
 
-        public String getAppsecret() {
-            return appsecret;
+        public String getPhone() {
+            return phone;
         }
 
-        public void setAppsecret(String appsecret) {
-            this.appsecret = appsecret;
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
 
-        public String getCreatetime() {
-            return createtime;
+        public String getSessionId() {
+            return sessionId;
         }
 
-        public void setCreatetime(String createtime) {
-            this.createtime = createtime;
+        public void setSessionId(String sessionId) {
+            this.sessionId = sessionId;
         }
 
-        public Object getEmail() {
-            return email;
+        public int getSex() {
+            return sex;
         }
 
-        public void setEmail(Object email) {
-            this.email = email;
+        public void setSex(int sex) {
+            this.sex = sex;
         }
 
-        public Object getFans() {
-            return fans;
-        }
-
-        public void setFans(Object fans) {
-            this.fans = fans;
-        }
-
-        public Object getFollow() {
-            return follow;
-        }
-
-        public void setFollow(Object follow) {
-            this.follow = follow;
-        }
-
-        public Object getGender() {
-            return gender;
-        }
-
-        public void setGender(Object gender) {
-            this.gender = gender;
-        }
-
-        public Object getIcon() {
-            return icon;
-        }
-
-        public void setIcon(Object icon) {
-            this.icon = icon;
-        }
-
-        public Object getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(Object latitude) {
-            this.latitude = latitude;
-        }
-
-        public Object getLongitude() {
-            return longitude;
-        }
-
-        public void setLongitude(Object longitude) {
-            this.longitude = longitude;
-        }
-
-        public String getMobile() {
-            return mobile;
-        }
-
-        public void setMobile(String mobile) {
-            this.mobile = mobile;
-        }
-
-        public Object getMoney() {
-            return money;
-        }
-
-        public void setMoney(Object money) {
-            this.money = money;
-        }
-
-        public Object getNickname() {
-            return nickname;
-        }
-
-        public void setNickname(Object nickname) {
-            this.nickname = nickname;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public Object getPraiseNum() {
-            return praiseNum;
-        }
-
-        public void setPraiseNum(Object praiseNum) {
-            this.praiseNum = praiseNum;
-        }
-
-        public String getToken() {
-            return token;
-        }
-
-        public void setToken(String token) {
-            this.token = token;
-        }
-
-        public int getUid() {
-            return uid;
-        }
-
-        public void setUid(int uid) {
-            this.uid = uid;
-        }
-
-        public Object getUserId() {
+        public int getUserId() {
             return userId;
         }
 
-        public void setUserId(Object userId) {
+        public void setUserId(int userId) {
             this.userId = userId;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
         }
     }
 }

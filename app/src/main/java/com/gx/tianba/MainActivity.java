@@ -1,177 +1,144 @@
 package com.gx.tianba;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.gx.tianba.fragment.find.FindFragment;
-import com.gx.tianba.fragment.options.OptionsFragment;
-import com.gx.tianba.fragment.seller.SellerFragment;
-import com.gx.tianba.fragment.shopcart.ShopCartFragment;
-import com.gx.tianba.fragment.sort.SortFragment;
+import com.gx.tianba.fragment.home.HomeFragment;
+import com.gx.tianba.fragment.list.ListFragment;
+import com.gx.tianba.fragment.my.MyFragment;
+import com.gx.tianba.fragment.search.SearchFragment;
+import com.gx.tianba.fragment.shopping.ShoppingFragment;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
 
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageView main_home;
+    private ImageView main_search;
+    private ImageView main_shopping;
+    private ImageView main_list;
+    private ImageView main_my;
 
-    private TabLayout tablayout;
-    private ShopCartFragment shopCartFragment;
-    private OptionsFragment optionsFragment;
-    private SellerFragment sellerFragment;
-    private SortFragment sortFragment;
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
-   /* private String titles[] = {"首页", "分类", "购物车", "我的","发现"};*/
-    private int[] imageViews={R.mipmap.home_sel,R.mipmap.sort,R.mipmap.shop_cart,R.mipmap.option,R.mipmap.find};
-    private int[] imageViewone={R.mipmap.home,R.mipmap.sort,R.mipmap.shop_cart,R.mipmap.option,R.mipmap.find};
-    private FindFragment findFragment;
+    private MyFragment myFragment;
+    private HomeFragment homeFragment;
+    private SearchFragment searchFragment;
+    private ListFragment listFragment;
+    private ShoppingFragment shoppingFragment;
+    private ViewPager viewpager;
 
-    //private int[] imageViews={R.mipmap.home_sel,R.mipmap.sort,R.mipmap.shop_cart,R.mipmap.option,R.mipmap.find};
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        fragmentManager = getFragmentManager();
-        sortFragment = new SortFragment();
-        shopCartFragment = new ShopCartFragment();
-        optionsFragment = new OptionsFragment();
-        sellerFragment = new SellerFragment();
-        findFragment = new FindFragment();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frame, sellerFragment);
-        fragmentTransaction.add(R.id.frame, sortFragment);
-        fragmentTransaction.add(R.id.frame, shopCartFragment);
-        fragmentTransaction.add(R.id.frame, optionsFragment);
-        fragmentTransaction.add(R.id.frame,findFragment);
-        fragmentTransaction.hide(sortFragment);
-        fragmentTransaction.hide(shopCartFragment);
-        fragmentTransaction.hide(optionsFragment);
-        fragmentTransaction.show(sellerFragment);
-        fragmentTransaction.hide(findFragment);
-        fragmentTransaction.commit();
-        for (int i = 0; i < tablayout.getTabCount(); i++) {
-            TabLayout.Tab tab = tablayout.getTabAt(i);
-            if (tab != null) {
-                tab.setCustomView(getTabView(i,imageViews));
-            }
-        }
+        List<Fragment> list = new ArrayList<Fragment>();
+        myFragment = new MyFragment();
+        homeFragment = new HomeFragment();
+        searchFragment = new SearchFragment();
+        listFragment = new ListFragment();
+        shoppingFragment = new ShoppingFragment();
 
-        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        list.add(homeFragment);
+        list.add(searchFragment);
+        list.add(shoppingFragment);
+        list.add(listFragment);
+        list.add(myFragment);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager(), list);
+
+        viewpager.setAdapter(viewPagerAdapter);
+
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                switch (i){
                     case 0:
-                        isseletab(0);
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.show(sellerFragment);
-                        fragmentTransaction.hide(sortFragment);
-                        fragmentTransaction.hide(shopCartFragment);
-                        fragmentTransaction.hide(optionsFragment);
-                        fragmentTransaction.hide(findFragment);
-                        fragmentTransaction.commit();
+                        main_home.setImageResource(R.mipmap.common_tab_btn_home_s_xxhdpi);
+                        main_search.setImageResource(R.mipmap.common_tab_btn_circle_n_xxhdpi);
+                        main_shopping.setImageResource(R.mipmap.commom_tab_btn_shopping_cart_n_xxhdpi);
+                        main_list.setImageResource(R.mipmap.common_tab_btn_list_n_xxhdi);
+                        main_my.setImageResource(R.mipmap.common_tab_btn_my_n_xxhdpi);
                         break;
                     case 1:
-                        isseletab(1);
-                        FragmentTransaction fragmentTransaction1 = fragmentManager.beginTransaction();
-                        fragmentTransaction1.hide(sellerFragment);
-                        fragmentTransaction1.show(sortFragment);
-                        fragmentTransaction1.hide(shopCartFragment);
-                        fragmentTransaction1.hide(optionsFragment);
-                        fragmentTransaction1.hide(findFragment);
-                        fragmentTransaction1.commit();
+                        main_home.setImageResource(R.mipmap.common_tab_btn_home_n_xxhdpi);
+                        main_search.setImageResource(R.mipmap.common_tab_btn_circle_s_xxhdpi);
+                        main_shopping.setImageResource(R.mipmap.commom_tab_btn_shopping_cart_n_xxhdpi);
+                        main_list.setImageResource(R.mipmap.common_tab_btn_list_n_xxhdi);
+                        main_my.setImageResource(R.mipmap.common_tab_btn_my_n_xxhdpi);
                         break;
                     case 2:
-                        isseletab(2);
-                        FragmentTransaction fragmentTransaction2 = fragmentManager.beginTransaction();
-                        fragmentTransaction2.hide(sellerFragment);
-                        fragmentTransaction2.hide(sortFragment);
-                        fragmentTransaction2.show(shopCartFragment);
-                        fragmentTransaction2.hide(optionsFragment);
-                        fragmentTransaction2.hide(findFragment);
-                        fragmentTransaction2.commit();
+                        main_home.setImageResource(R.mipmap.common_tab_btn_home_n_xxhdpi);
+                        main_search.setImageResource(R.mipmap.common_tab_btn_circle_n_xxhdpi);
+                        main_shopping.setImageResource(R.mipmap.commom_tab_btn_shopping_cart_n_xxhdpi);
+                        main_list.setImageResource(R.mipmap.common_tab_btn_list_n_xxhdi);
+                        main_my.setImageResource(R.mipmap.common_tab_btn_my_n_xxhdpi);
                         break;
                     case 3:
-                        isseletab(3);
-                        FragmentTransaction fragmentTransaction3 = fragmentManager.beginTransaction();
-                        fragmentTransaction3.hide(sellerFragment);
-                        fragmentTransaction3.hide(sortFragment);
-                        fragmentTransaction3.hide(shopCartFragment);
-                        fragmentTransaction3.show(optionsFragment);
-                        fragmentTransaction3.hide(findFragment);
-                        fragmentTransaction3.commit();
+                        main_home.setImageResource(R.mipmap.common_tab_btn_home_n_xxhdpi);
+                        main_search.setImageResource(R.mipmap.common_tab_btn_circle_n_xxhdpi);
+                        main_shopping.setImageResource(R.mipmap.commom_tab_btn_shopping_cart_n_xxhdpi);
+                        main_list.setImageResource(R.mipmap.common_tab_btn_list_s_xxhdpi);
+                        main_my.setImageResource(R.mipmap.common_tab_btn_my_n_xxhdpi);
                         break;
                     case 4:
-                        isseletab(4);
-                        FragmentTransaction fragmentTransaction4 = fragmentManager.beginTransaction();
-                        fragmentTransaction4.hide(sellerFragment);
-                        fragmentTransaction4.hide(sortFragment);
-                        fragmentTransaction4.hide(shopCartFragment);
-                        fragmentTransaction4.hide(optionsFragment);
-                        fragmentTransaction4.show(findFragment);
-                        fragmentTransaction4.commit();
+                        main_home.setImageResource(R.mipmap.common_tab_btn_home_n_xxhdpi);
+                        main_search.setImageResource(R.mipmap.common_tab_btn_circle_n_xxhdpi);
+                        main_shopping.setImageResource(R.mipmap.commom_tab_btn_shopping_cart_n_xxhdpi);
+                        main_list.setImageResource(R.mipmap.common_tab_btn_list_n_xxhdi);
+                        main_my.setImageResource(R.mipmap.common_tab_btn_my_s_xxhdpi);
                         break;
                 }
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+            public void onPageScrollStateChanged(int i) {
 
             }
         });
     }
 
-    public View getTabView(int position,int[] imag){
-        //首先为子tab布置一个布局
-        View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.tab,null);
-        ImageView iv = (ImageView) v.findViewById(R.id.tab_Dial_Img);
-        iv.setImageResource(imag[position]);
-        return v;
-    }
-    //传过来的索引
-    public void isseletab(int position){
-        for (int i = 0; i < 5; i++) {
-            //得到具体的每一个tab
-            ImageView image1 = tablayout.getTabAt(i).getCustomView().findViewById(R.id.tab_Dial_Img);
-            //判断i是否和position相等
-            //相等的话说明点的就是这个 就给它设置图片
-            if (i==position&&position==0){
-                image1.setImageResource(R.mipmap.home_sel);
-                continue;
-            }
-            else if (i==position&&position==1){
-                image1.setImageResource(R.mipmap.sort_sel);
-                continue;
-            }
-            else if (i==position&&position==2){
-                image1.setImageResource(R.mipmap.shop_cart_sel);
-                continue;
-            }
-            else if (i==position&&position==3){
-                image1.setImageResource(R.mipmap.option_sel);
-                continue;
-            }
-            else if (i==position&&position==4){
-                image1.setImageResource(R.mipmap.refresh);
-                continue;
-            }
-            else {
-                image1.setImageResource(imageViewone[i]);
-            }
-        }
-
-    }
     private void initView() {
-        tablayout = (TabLayout) findViewById(R.id.tab);
+        main_home = (ImageView) findViewById(R.id.main_home);
+        main_home.setOnClickListener(this);
+        main_search = (ImageView) findViewById(R.id.main_search);
+        main_search.setOnClickListener(this);
+        main_shopping = (ImageView) findViewById(R.id.main_shopping);
+        main_shopping.setOnClickListener(this);
+        main_list = (ImageView) findViewById(R.id.main_list);
+        main_list.setOnClickListener(this);
+        main_my = (ImageView) findViewById(R.id.main_my);
+        main_my.setOnClickListener(this);
+        viewpager = (ViewPager) findViewById(R.id.viewpager);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.main_home:
+                viewpager.setCurrentItem(0);
+                break;
+            case R.id.main_search:
+                viewpager.setCurrentItem(1);
+                break;
+            case R.id.main_shopping:
+                viewpager.setCurrentItem(2);
+                break;
+            case R.id.main_list:
+                viewpager.setCurrentItem(3);
+                break;
+            case R.id.main_my:
+                viewpager.setCurrentItem(4);
+                break;
+        }
     }
 }

@@ -69,11 +69,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 switch (event.getAction()){
                     case MotionEvent.ACTION_DOWN:
                         edPwd.setInputType(InputType.TYPE_CLASS_NUMBER);
-                        Log.w("----","按下");
+                        //Log.w("----","按下");
                         break;
                     case MotionEvent.ACTION_UP:
                         edPwd.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-                        Log.w("----","抬起");
+                        //Log.w("----","抬起");
                         break;
                 }
                 return false;
@@ -143,15 +143,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onLoginSuccess(final Login login) {
         //隐藏bar
-
-    }
-
-    @Override
-    public void onLoginFailer(final String msg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(LoginActivity.this, "" + msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "" + login.getMessage(), Toast.LENGTH_SHORT).show();
                 //登录成功之后判断记住密码是否选中保存账号密码
                 if (remember.isChecked()){
                     SharedPreferences.Editor edit = sp.edit();
@@ -170,6 +165,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+    }
+
+    @Override
+    public void onLoginFailer(final String msg) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(LoginActivity.this, "" + msg, Toast.LENGTH_SHORT).show();
             }
         });
     }

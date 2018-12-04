@@ -9,6 +9,8 @@ import com.gx.tianba.util.net.HttpUrl;
 import com.gx.tianba.util.net.OkHttpUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -16,11 +18,10 @@ import okhttp3.Response;
 
 public class LoginModel {
     public void login(String mobile,String password,final loginCallBack loginCallBack){
-        String url = "http://172.17.8.100/small/user/v1/login?phone="+mobile+"&pwd="+password;
-        BaseRequest request=new BaseRequest();
-        request.phone=mobile;
-        request.pwd=password;
-        OkHttpUtils.enqueuePost(new Callback() {
+        Map<String,String> map=new HashMap<>();
+        map.put("phone",mobile);
+        map.put("pwd",password);
+        OkHttpUtils.enqueuePosttwo(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -41,7 +42,7 @@ public class LoginModel {
                     }
                 }
             }
-        },url,new BaseRequest());
+        },HttpUrl.LOGIN_URL,map);
     }
 
     public interface loginCallBack{

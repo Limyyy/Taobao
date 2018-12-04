@@ -1,9 +1,13 @@
 package com.gx.tianba.regis.model;
 
+import com.google.gson.Gson;
+import com.gx.tianba.regis.bean.Regis;
 import com.gx.tianba.util.net.HttpUrl;
 import com.gx.tianba.util.net.OkHttpUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -11,14 +15,11 @@ import okhttp3.Response;
 
 public class RegisModel {
 
-    public void presenterModel(String username,String password,CallBack callBack){
-        if (username.equals("123")&&password.equals("123")){
-            callBack.backData("注册成功",1);
-        }
-        else{
-            callBack.backData("注册失败",0);
-        }
-        /*OkHttpUtils.enqueueGet(new Callback() {
+    public void presenterModel(String username, String password, final CallBack callBack){
+        Map<String,String> map=new HashMap<>();
+        map.put("phone",username);
+        map.put("pwd",password);
+        OkHttpUtils.enqueuePosttwo(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -26,12 +27,25 @@ public class RegisModel {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                if (response.code()==200){
+                    String trim = response.body().string().trim();
+                    Gson gson=new Gson();
+                    Regis regis = gson.fromJson(trim, Regis.class);
+                    String message = regis.getMessage();
+                    if (regis.getStatus().equals("0000")) {
+                        callBack.backSuccessData(message,0000);
+                    }
+                    else {
+                        callBack.backFailerData(message);
+                    }
+                }
 
             }
-        },HttpUrl.REGISTER);*/
+        },HttpUrl.REGISTER,map);
     }
 
     public interface CallBack{
-        void backData(String msg,int code);
+        void backSuccessData(String msg,int code);
+        void backFailerData(String msg);
     }
 }

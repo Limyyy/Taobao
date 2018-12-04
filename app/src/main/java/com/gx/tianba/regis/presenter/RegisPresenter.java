@@ -15,8 +15,13 @@ public class RegisPresenter {
     public void presenterRegister(String username,String password){
         regisModel.presenterModel(username, password, new RegisModel.CallBack() {
             @Override
-            public void backData(String msg,int code) {
+            public void backSuccessData(String msg, int code) {
                 iRegis.regisSuccess(msg,code);
+            }
+
+            @Override
+            public void backFailerData(String msg) {
+                iRegis.regisFailer(msg);
             }
         });
     }
