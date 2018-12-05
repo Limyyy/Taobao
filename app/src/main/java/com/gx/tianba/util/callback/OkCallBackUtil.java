@@ -16,7 +16,7 @@ import okhttp3.Response;
  */
 public class OkCallBackUtil implements Callback {
 
-    private Handler handler=new Handler();
+     Handler handler=new Handler();
     private Gson gson=new Gson();
     private OkHttpListner okHttpListner;
 
@@ -35,18 +35,28 @@ public class OkCallBackUtil implements Callback {
         switch (code){
             case 200:
                 //请求成功
-                String trim = response.body().string().trim();
-                DataBean dataBean = gson.fromJson(trim, DataBean.class);
+                final String trim = response.body().string().trim();
+                final DataBean dataBean = gson.fromJson(trim, DataBean.class);
                 String status = dataBean.getStatus();
                 //判断得到的code
                 switch (status){
                     //成功
                     case "0000":
-                       okHttpListner.OnCallBackSuccess(trim);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                okHttpListner.OnCallBackSuccess(trim);
+                            }
+                        });
                         break;
                     //失败
                     case "1001":
-                        okHttpListner.OnCallBackFailer(dataBean.getMessage());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                okHttpListner.OnCallBackFailer(dataBean.getMessage());
+                            }
+                        });
                         break;
                 }
                 break;

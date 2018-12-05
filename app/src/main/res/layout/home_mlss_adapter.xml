@@ -16,6 +16,7 @@
         android:background="@mipmap/mlss_bitmap"
         android:layout_height="50dp">
         <TextView
+            android:background="@null"
             android:layout_marginLeft="48dp"
             android:textColor="#608ed9"
             android:textSize="16sp"
@@ -33,8 +34,10 @@
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mlss_ryl"
-        android:layout_marginLeft="24sp"
+        android:layout_marginLeft="25sp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        ></android.support.v7.widget.RecyclerView>
 </LinearLayout>

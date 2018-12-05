@@ -94,15 +94,7 @@ public class OkHttpUtils {
             body = builder.build();
         }
         Request.Builder builder=new Request.Builder().url(url);
-        Request request=null;
-        switch (method) {
-            case METHOD_GET:
-                request=builder.build();
-                break;
-            case METHOD_POST:
-                request=builder.post(body).build();
-                break;
-        }
+        Request request=builder.post(body).build();
         return request;
     }
 }

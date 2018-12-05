@@ -92,51 +92,38 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void regisSuccess(final String msg, final int code) {
-        runOnUiThread(new Runnable() {
+        //Toast.makeText(RegisterActivity.this,""+msg,Toast.LENGTH_SHORT).show();
+        //注册成功后弹出对话框
+        AlertDialog.Builder builder=new AlertDialog.Builder(RegisterActivity.this);
+        View view = View.inflate(RegisterActivity.this, R.layout.regis_is_remeber_alert, null);
+        builder.setView(view);
+        alertDialog = builder.create();
+        alertDialog.show();
+        yesremeber = view.findViewById(R.id.yes_remeber);
+        noremeber = view.findViewById(R.id.no_remeber);
+        //记住的话给登录页面返回值
+        yesremeber.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                    //Toast.makeText(RegisterActivity.this,""+msg,Toast.LENGTH_SHORT).show();
-                    //注册成功后弹出对话框
-                    AlertDialog.Builder builder=new AlertDialog.Builder(RegisterActivity.this);
-                    View view = View.inflate(RegisterActivity.this, R.layout.regis_is_remeber_alert, null);
-                    builder.setView(view);
-                    alertDialog = builder.create();
-                    alertDialog.show();
-                    yesremeber = view.findViewById(R.id.yes_remeber);
-                    noremeber = view.findViewById(R.id.no_remeber);
-                    //记住的话给登录页面返回值
-                yesremeber.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //关闭弹框
-                        alertDialog.dismiss();
-                        Intent intent = new Intent();
-                        intent.putExtra("username",username);
-                        intent.putExtra("password",password);
-                        intent.putExtra("regisischeck",true);
-                        setResult(2,intent);
-                        finish(); //结束当前的activity
-                    }
-                });
-                //不记住的话直接关闭弹框
-                noremeber.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog.dismiss();
-                    }
-                });
-                }
-        });
-
+            public void onClick(View v) {//关闭弹框
+                alertDialog.dismiss();
+                Intent intent = new Intent();
+                intent.putExtra("username",username);
+                intent.putExtra("password",password);
+                intent.putExtra("regisischeck",true);
+                setResult(2,intent);
+                finish(); //结束当前的activity
+            }
+            });
+        //不记住的话直接关闭弹框
+        noremeber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }});
     }
 
     @Override
     public void regisFailer(final String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(RegisterActivity.this,""+msg,Toast.LENGTH_SHORT).show();
-            }
-        });
+        Toast.makeText(RegisterActivity.this,""+msg,Toast.LENGTH_SHORT).show();
     }
 }

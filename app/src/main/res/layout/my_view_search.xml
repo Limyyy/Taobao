@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="30dp">
+    <ImageView
+        android:id="@+id/search_iamge"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
+        android:background="@mipmap/common_nav_btn_search_n_xxhdpi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="请输入要搜索的宝贝"
+        android:textSize="13dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/my_search_view"
+        android:id="@+id/my_view_search_edittext"
+        android:layout_width="380dp"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/my_view_search_button"
+        android:layout_width="wrap_content"
+        android:text="搜索"
+        android:textColor="#4d4d4d"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="match_parent" />
+</LinearLayout>

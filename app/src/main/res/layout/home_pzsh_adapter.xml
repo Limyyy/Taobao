@@ -14,8 +14,9 @@
         android:background="@mipmap/pzsh_bitmap"
         android:layout_height="50dp">
         <TextView
+            android:background="@null"
             android:layout_marginLeft="48dp"
-            android:textColor="#ff57f7"
+            android:textColor="#ff7f8d"
             android:textSize="16sp"
             android:id="@+id/pzsh_text"
             android:gravity="center"
@@ -32,7 +33,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/pzsh_ryl"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 </LinearLayout>

@@ -27,6 +27,7 @@ import com.gx.tianba.login.view.ILoginView;
 import com.gx.tianba.regis.activity.RegisterActivity;
 import com.gx.tianba.util.ButtonUtil;
 import com.gx.tianba.util.ToastUtil;
+import com.gx.tianba.util.sp.SpUtil;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ILoginView {
 
@@ -130,44 +131,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onLoginSuccess(final Login login) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this, "" + login.getMessage(), Toast.LENGTH_SHORT).show();
-                //登录成功之后判断记住密码是否选中保存账号数据
-                if (remember.isChecked()){
-                    SharedPreferences.Editor edit = sp.edit();
-                    edit.putBoolean("islogin", true);
-                    edit.putInt("userId", login.getResult().getUserId());
-                    edit.putString("sessionId", login.getResult().getSessionId());
-                    edit.putString("name", edName.getText().toString().trim());
-                    edit.putString("password", edPwd.getText().toString().trim());
-                    edit.commit();
-                }
-                else {
-                    SharedPreferences.Editor edit = sp.edit();
-                    edit.putBoolean("islogin", false);
-                    edit.putString("name", "");
-                    edit.putString("password", "");
-                    edit.commit();
-                }
-                //保存之后跳转(不保存也跳转)
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        Toast.makeText(LoginActivity.this, "" + login.getMessage(), Toast.LENGTH_SHORT).show();
+        //登录成功之后判断记住密码是否选中保存账号数据
+        if (remember.isChecked()){
+            SpUtil.putSpData(login,true,edName.getText().toString().trim(),edPwd.getText().toString().trim());
+        }
+            //保存之后跳转
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     //登录失败的Toast
     @Override
     public void onLoginFailer(final String msg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ToastUtil.Toast(msg);
-            }
-        });
+        ToastUtil.Toast(msg);
     }
 
     //设置注册之后是否要展示的用户名和密码

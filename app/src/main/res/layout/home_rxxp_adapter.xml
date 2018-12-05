@@ -10,6 +10,7 @@
         android:background="@mipmap/rxxp_bitmap"
         android:layout_height="40dp">
         <TextView
+            android:background="@null"
             android:layout_marginLeft="48dp"
             android:textColor="#ff7f57"
             android:textSize="16sp"
@@ -27,8 +28,10 @@
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rxxp_ryl"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
