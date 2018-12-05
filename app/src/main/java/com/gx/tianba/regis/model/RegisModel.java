@@ -2,6 +2,8 @@ package com.gx.tianba.regis.model;
 
 import com.google.gson.Gson;
 import com.gx.tianba.regis.bean.Regis;
+import com.gx.tianba.util.callback.OkCallBackUtil;
+import com.gx.tianba.util.callback.OkHttpListner;
 import com.gx.tianba.util.net.HttpUrl;
 import com.gx.tianba.util.net.OkHttpUtils;
 
@@ -19,29 +21,19 @@ public class RegisModel {
         Map<String,String> map=new HashMap<>();
         map.put("phone",username);
         map.put("pwd",password);
-        OkHttpUtils.enqueuePosttwo(new Callback() {
+        OkHttpUtils.enqueuePosttwo(new OkCallBackUtil(new OkHttpListner() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
+            public void OnCallBackSuccess(String json) {
+                Gson gson=new Gson();
+                Regis regis = gson.fromJson(json, Regis.class);
+                String message = regis.getMessage();
+                callBack.backSuccessData(message,0000);
             }
-
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.code()==200){
-                    String trim = response.body().string().trim();
-                    Gson gson=new Gson();
-                    Regis regis = gson.fromJson(trim, Regis.class);
-                    String message = regis.getMessage();
-                    if (regis.getStatus().equals("0000")) {
-                        callBack.backSuccessData(message,0000);
-                    }
-                    else {
-                        callBack.backFailerData(message);
-                    }
-                }
-
+            public void OnCallBackFailer(String msg) {
+                callBack.backFailerData(msg);
             }
-        },HttpUrl.REGISTER,map);
+        }),HttpUrl.REGISTER,map);
     }
 
     public interface CallBack{

@@ -26,9 +26,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RegisPresenter regisPresenter;
     private String username;
     private String password;
-    private String sex;
-    private String age;
-    private String mobile;
     private Button yesremeber;
     private Button noremeber;
     private AlertDialog alertDialog;
@@ -39,10 +36,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
+        //绑定p层和activity层
         regisPresenter = new RegisPresenter(this);
 
     }
-
+    //find view
     private void initView() {
         regis_back = (TextView) findViewById(R.id.regis_back);
         regis_edit_username = (EditText) findViewById(R.id.regis_edit_username);
@@ -57,9 +55,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.regis_button:
+                //注册
                 submit();
                 break;
             case R.id.regis_back:
+                //取消注册返回登录界面
                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                 finish();
                 break;
@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void submit() {
-        // validate
+        //非空验证
         username = regis_edit_username.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(this, "请输入用户名", Toast.LENGTH_SHORT).show();
@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        //去请求数据注册
         regisPresenter.presenterRegister(username,password);
     }
 
