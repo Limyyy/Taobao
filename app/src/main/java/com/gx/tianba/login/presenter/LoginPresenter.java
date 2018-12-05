@@ -14,28 +14,19 @@ public class LoginPresenter {
     }
 
     public void login(String mobile,String password){
-        //使进度条显示
-        loginView.showLoading();
         model.login(mobile, password, new LoginModel.loginCallBack() {
             @Override
             public void onSuccess(Login login) {
-                loginView.hideLoading();
                 loginView.onLoginSuccess(login);
             }
 
             @Override
             public void onFailer(String msg) {
-                loginView.hideLoading();
-                loginView.onLoginFailer(msg);
-            }
-
-            @Override
-            public void onConnectionFailer(String msg) {
-                loginView.hideLoading();
                 loginView.onLoginFailer(msg);
             }
         });
     }
+    //防止内存泄漏
     public void  onDestory(){
         if (loginView!=null){
             loginView=null;

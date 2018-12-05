@@ -26,6 +26,7 @@ import com.gx.tianba.login.presenter.LoginPresenter;
 import com.gx.tianba.login.view.ILoginView;
 import com.gx.tianba.regis.activity.RegisterActivity;
 import com.gx.tianba.util.ButtonUtil;
+import com.gx.tianba.util.ToastUtil;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, ILoginView {
 
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sp();
         loginPresenter = new LoginPresenter(this);
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private void sp() {
@@ -68,12 +70,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()){
                     case MotionEvent.ACTION_DOWN:
-                        edPwd.setInputType(InputType.TYPE_CLASS_NUMBER);
                         //Log.w("----","按下");
+                        edPwd.setInputType(InputType.TYPE_CLASS_NUMBER);
                         break;
                     case MotionEvent.ACTION_UP:
-                        edPwd.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
                         //Log.w("----","抬起");
+                        edPwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         break;
                 }
                 return false;
@@ -111,9 +113,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
+    //登录
     private void submit() {
-        // validate
         String edNameString = edName.getText().toString().trim();
         if (TextUtils.isEmpty(edNameString)) {
             Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
@@ -124,33 +125,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        //bar点击登录的时候显示
         loginPresenter.login(edName.getText().toString().trim(), edPwd.getText().toString().trim());
     }
 
     @Override
-    public void showLoading() {
-        //隐藏bar
-
-    }
-
-    @Override
-    public void hideLoading() {
-        //隐藏bar
-
-    }
-
-    @Override
     public void onLoginSuccess(final Login login) {
-        //隐藏bar
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(LoginActivity.this, "" + login.getMessage(), Toast.LENGTH_SHORT).show();
-                //登录成功之后判断记住密码是否选中保存账号密码
+                //登录成功之后判断记住密码是否选中保存账号数据
                 if (remember.isChecked()){
                     SharedPreferences.Editor edit = sp.edit();
                     edit.putBoolean("islogin", true);
+                    edit.putInt("userId", login.getResult().getUserId());
+                    edit.putString("sessionId", login.getResult().getSessionId());
                     edit.putString("name", edName.getText().toString().trim());
                     edit.putString("password", edPwd.getText().toString().trim());
                     edit.commit();
@@ -162,6 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     edit.putString("password", "");
                     edit.commit();
                 }
+                //保存之后跳转(不保存也跳转)
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -169,12 +159,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    //登录失败的Toast
     @Override
     public void onLoginFailer(final String msg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(LoginActivity.this, "" + msg, Toast.LENGTH_SHORT).show();
+                ToastUtil.Toast(msg);
             }
         });
     }
