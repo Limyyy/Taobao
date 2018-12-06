@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public class ViewPagerAdapter extends android.support.v13.app.FragmentPagerAdapter {
+public  class ViewPagerAdapter extends android.support.v13.app.FragmentPagerAdapter {
 
     private List<android.app.Fragment> fragmentlists;
 

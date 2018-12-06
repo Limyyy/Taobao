@@ -40,6 +40,7 @@ public class SpUtil {
     public static Login.ResultBean getSpData(){
         int userId = sp.getInt("userId",-1);
         String sessionId = sp.getString("sessionId", "");
+        String password = sp.getString("password", "");
         String headPic = sp.getString("headPic", "");
         String nickName = sp.getString("nickName","");
         int sex = sp.getInt("sex", -1);
@@ -51,6 +52,7 @@ public class SpUtil {
         result.setNickName(nickName);
         result.setSex(sex);
         result.setPhone(phone);
+        result.setPassword(password);
         return result;
     }
 }

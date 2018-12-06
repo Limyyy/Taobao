@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gx.tianba.R;
-import com.gx.tianba.fragment.my.childfragment.MyPersonFragment;
+import com.gx.tianba.fragment.my.mychildfragment.MyPersonFragment;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.fresco.FrescoUtil;
 import com.gx.tianba.util.sp.SpUtil;

@@ -28,7 +28,8 @@ public class OkHttpInterceptors implements Interceptor {
         /**
          * 添加请求头
          */
-        Request request = chain.request().newBuilder().addHeader("sessionId", sessionId)
+        Request request = chain.request().newBuilder().
+                addHeader("sessionId", sessionId)
                 .addHeader("userId", "" + userId)
                 .build();
         long t1 = System.nanoTime();

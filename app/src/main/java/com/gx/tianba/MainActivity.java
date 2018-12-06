@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.gx.tianba.fragment.home.HomeFragment;
+import com.gx.tianba.fragment.home.homemainfragment.HomeMainFragment;
 import com.gx.tianba.fragment.list.ListFragment;
 import com.gx.tianba.fragment.my.MyFragment;
 import com.gx.tianba.fragment.search.SearchFragment;
@@ -24,12 +25,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView main_list;
     private ImageView main_my;
 
-    private MyFragment myFragment;
-    private HomeFragment homeFragment;
     private SearchFragment searchFragment;
     private ListFragment listFragment;
     private ShoppingFragment shoppingFragment;
     private ViewPager viewpager;
+    private MyFragment myFragment;
+    private HomeFragment homeFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getFragmentManager(), list);
 
         viewpager.setAdapter(viewPagerAdapter);
+
+        //viewpager预加载
+        viewpager.setOffscreenPageLimit(4);
 
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

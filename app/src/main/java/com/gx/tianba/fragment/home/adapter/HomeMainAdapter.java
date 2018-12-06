@@ -1,5 +1,6 @@
 package com.gx.tianba.fragment.home.adapter;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -30,9 +31,10 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
     private final int TYPE_TWO=1;
     private final int TYPE_THREE=2;
     private final int TYPE_FOUR=3;
-
-    public HomeMainAdapter(Context context, Home.ResultBean result,List<com.gx.tianba.fragment.home.bean.Banner.ResultBean> bannerresult) {
+    private MenuClickListner menuClickListner;
+    public HomeMainAdapter(MenuClickListner menuClickListner1,Context context, Home.ResultBean result,List<com.gx.tianba.fragment.home.bean.Banner.ResultBean> bannerresult) {
         this.context = context;
+        this.menuClickListner=menuClickListner1;
         this.result = result;
         this.bannerresult=bannerresult;
     }
@@ -93,6 +95,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
             rxxpViewHolder.rxxpryl.addItemDecoration(dividerItemDecoratio);
 
         }
+        //魔力时尚
         else if (getItemViewType(i)==TYPE_THREE){
             MlssViewHolder mlssViewHolder= (MlssViewHolder) viewHolder;
             List<Home.ResultBean.MlssBean> mlss = result.getMlss();
@@ -106,6 +109,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
             MlssAdapter mlssAdapter = new MlssAdapter(commodityList,context);
             mlssViewHolder.mlssryl.setAdapter(mlssAdapter);
         }
+        //品质生活
         else {
             PzshViewHolder pzshViewHolder= (PzshViewHolder) viewHolder;
             List<Home.ResultBean.PzshBean> pzsh = result.getPzsh();
@@ -159,7 +163,15 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
             rxxptext=itemView.findViewById(R.id.rxxp_text);
             rxxpimagemenu=itemView.findViewById(R.id.rxxp_menu_image);
             rxxpryl=itemView.findViewById(R.id.rxxp_ryl);
+            //点击通过接口回调到这个适配器的fragment告诉它点击的哪个界面
+            rxxpimagemenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    menuClickListner.RxxpMenuClickListner(1,result);
+                }
+            });
         }
+
     }
     //魔力时尚
     public class MlssViewHolder extends RecyclerView.ViewHolder{
@@ -171,6 +183,13 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
             mlsstext=itemView.findViewById(R.id.mlss_text);
             mlssimagemenu=itemView.findViewById(R.id.mlss_menu_image);
             mlssryl=itemView.findViewById(R.id.mlss_ryl);
+            //点击通过接口回调到这个适配器的fragment告诉它点击的哪个界面
+            mlssimagemenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    menuClickListner.MoliMenuClickListner(2,result);
+                }
+            });
         }
     }
     //品质生活
@@ -183,6 +202,20 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
             pzshtext=itemView.findViewById(R.id.pzsh_text);
             pzshimagemenu=itemView.findViewById(R.id.pzsh_menu_image);
             pzshryl=itemView.findViewById(R.id.pzsh_ryl);
+
+            //点击通过接口回调到这个适配器的fragment告诉它点击的哪个界面
+            pzshimagemenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    menuClickListner.PzshMenuClickListner(3,result);
+                }
+            });
         }
+    }
+    //设置跳转后fragment要展示的数据类型
+    public interface MenuClickListner{
+        void RxxpMenuClickListner(int type,Home.ResultBean result);
+        void MoliMenuClickListner(int type,Home.ResultBean result);
+        void PzshMenuClickListner(int type,Home.ResultBean result);
     }
 }
