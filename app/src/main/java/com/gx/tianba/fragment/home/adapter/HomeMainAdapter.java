@@ -1,20 +1,29 @@
 package com.gx.tianba.fragment.home.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.home.PicsoImageLoader;
+import com.gx.tianba.fragment.home.adapter.homemainviewpager.HomeMainViewPagerAdapter;
+import com.gx.tianba.fragment.home.adapter.homemainviewpager.RotationPageTransformer;
 import com.gx.tianba.fragment.home.bean.Home;
 import com.youth.banner.Banner;
 
@@ -32,6 +41,9 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
     private final int TYPE_THREE=2;
     private final int TYPE_FOUR=3;
     private MenuClickListner menuClickListner;
+    private ArrayList<String> banners;
+    private Handler handler;
+
     public HomeMainAdapter(MenuClickListner menuClickListner1,Context context, Home.ResultBean result,List<com.gx.tianba.fragment.home.bean.Banner.ResultBean> bannerresult) {
         this.context = context;
         this.menuClickListner=menuClickListner1;
@@ -44,7 +56,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //banner
         if (getItemViewType(i)==TYPE_ONE){
-            View view = View.inflate(context, R.layout.home_banner_adapter, null);
+            View view = LayoutInflater.from(context).inflate(R.layout.home_banner_adapter, null);
             return new BannerViewHolder(view);
         }
         //热销新品
@@ -64,18 +76,30 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         //banner
         if (getItemViewType(i)==TYPE_ONE){
-            BannerViewHolder bannerViewHolder= (BannerViewHolder) viewHolder;
-            ArrayList<String> banners=new ArrayList<>();
+            final BannerViewHolder bannerViewHolder= (BannerViewHolder) viewHolder;
+            banners = new ArrayList<>();
             for (int i1 = 0; i1 < bannerresult.size(); i1++) {
                 banners.add(bannerresult.get(i1).getImageUrl());
             }
-            bannerViewHolder.banner.setImageLoader(new PicsoImageLoader());
-            bannerViewHolder.banner.setImages(banners);
-            bannerViewHolder.banner.start();
+            bannerViewHolder.viewPager.setAdapter(new HomeMainViewPagerAdapter(banners,context));
+            bannerViewHolder.viewPager.setOffscreenPageLimit(banners.size());
+            bannerViewHolder.viewPager.setPageMargin(-160);//控制两幅图之间的间距,尽量以屏幕的宽度来确定
+            bannerViewHolder.viewPager.setPageTransformer(true,new RotationPageTransformer());
+            HomeMainViewPagerAdapter homeMainViewPagerAdapter = new HomeMainViewPagerAdapter(banners,context);
+            bannerViewHolder.viewPager.setAdapter(homeMainViewPagerAdapter);
+            //viewPager左右两边滑动无效的处理
+            bannerViewHolder.linearLayout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    return bannerViewHolder.viewPager.dispatchTouchEvent(motionEvent);
+                }
+            });
+            handler.sendEmptyMessageDelayed(0,2000);
         }
         //热销新品
         else if (getItemViewType(i)==TYPE_TWO){
@@ -147,10 +171,25 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
     }
     //banner
     public class BannerViewHolder extends RecyclerView.ViewHolder{
-        Banner banner;
+        LinearLayout linearLayout;
+        ViewPager viewPager;
+        @SuppressLint("HandlerLeak")
         public BannerViewHolder(@NonNull View itemView) {
             super(itemView);
-            banner=itemView.findViewById(R.id.banner);
+            viewPager=itemView.findViewById(R.id.home_main_viewpager);
+            linearLayout=itemView.findViewById(R.id.ll_gallery_outer);
+
+            handler=new Handler(){
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    if (msg.what==0){
+                        int currentItem = viewPager.getCurrentItem();
+                        viewPager.setCurrentItem(currentItem+1);
+                        handler.sendEmptyMessageDelayed(0,2000);
+                    }
+                }
+            };
         }
     }
     //热销新品
@@ -218,4 +257,5 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
         void MoliMenuClickListner(int type,Home.ResultBean result);
         void PzshMenuClickListner(int type,Home.ResultBean result);
     }
+
 }
