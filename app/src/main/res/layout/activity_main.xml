@@ -12,20 +12,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
     <LinearLayout
+        android:layout_marginLeft="-20dp"
         android:orientation="vertical"
+        android:background="@null"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_height="90dp">
-        <View
-            android:background="#545455"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center_vertical"
-            android:layout_height="80dp">
+            android:background="@mipmap/rectangle_6"
+            android:layout_height="110dp">
             <android.support.v4.widget.Space
+                android:layout_marginLeft="7dp"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -52,12 +52,13 @@
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/main_shopping"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_toRightOf="@id/main_search"
                 android:background="@mipmap/commom_tab_btn_shopping_cart_n_xxhdpi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="70dp"
+                android:layout_height="67dp" />
             <android.support.v4.widget.Space
                 android:layout_weight="1"
                 android:layout_width="wrap_content"

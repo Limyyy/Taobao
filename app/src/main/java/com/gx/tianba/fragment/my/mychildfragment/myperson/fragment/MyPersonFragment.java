@@ -1,4 +1,4 @@
-package com.gx.tianba.fragment.my.mychildfragment;
+package com.gx.tianba.fragment.my.mychildfragment.myperson.fragment;
 
 
 import android.app.Fragment;

@@ -43,6 +43,8 @@ public class HomeChildAdapter extends RecyclerView.Adapter<HomeChildAdapter.Home
         homeChildViewHolder.homechilditemtext.setText(resultBean.getCommodityName());
         homeChildViewHolder.homechilditemprice.setText("￥:"+resultBean.getPrice());
         homeChildViewHolder.homechilditemsalenum.setText(""+resultBean.getSaleNum());
+
+
     }
 
     @Override

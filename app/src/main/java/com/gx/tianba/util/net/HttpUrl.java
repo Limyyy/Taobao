@@ -1,6 +1,7 @@
 package com.gx.tianba.util.net;
 
 public interface HttpUrl {
+    public String BASE_URL="http://172.17.8.100/small/";
     public  String LOGIN_URL="http://172.17.8.100/small/user/v1/login";
     public String REGISTER="http://172.17.8.100/small/user/v1/register";
     public String BANNERSHOW="http://172.17.8.100/small/commodity/v1/bannerShow";

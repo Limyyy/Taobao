@@ -14,8 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.home.bean.Home;
 import com.gx.tianba.fragment.home.homechildfragment.adapter.HomeChildAdapter;
@@ -28,6 +30,7 @@ import com.gx.tianba.util.net.HttpUrl;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
 
 /**
@@ -42,6 +45,11 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
     private TextView home_child_name;
     private RecyclerView home_child_ryl;
     private HomeChildPresenter homeChildPresenter;
+    private ImageView home_child_failer_image;
+    private TextView home_child_failer_text;
+    private LinearLayout home_child_failer;
+    private LinearLayout home_child_name_text;
+    private LinearLayout home_child_ryl_line;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,49 +68,62 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
         });
         //连接P层
         homeChildPresenter = new HomeChildPresenter(this);
+
+        //点击搜索
+        home_child_sousuo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+        });
         return view;
     }
 
     //热销新品的数据
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setVieRxxpwData(List<Home.ResultBean.RxxpBean> rxxp){
-        Log.d("-----",rxxp+"");
+    public void setVieRxxpwData(List<Home.ResultBean.RxxpBean> rxxp) {
+        showDataKj();
+        Log.d("-----", rxxp + "");
         //标题
         home_child_name.setText(rxxp.get(0).getName());
         //背景
-        Drawable drawable=getActivity().getResources().getDrawable(R.mipmap.rxxp_bitmap);
+        Drawable drawable = getActivity().getResources().getDrawable(R.mipmap.rxxp_bitmap);
         home_child_name.setBackground(drawable);
         //文字颜色
         home_child_name.setTextColor(Color.parseColor("#ff7f57"));
         //发送请求
-        homeChildPresenter.setPreUrlGet(HttpUrl.HOMECHILD,1002,1,5);
+        homeChildPresenter.setPreUrlGet(HttpUrl.HOMECHILD, 1002, 1, 5);
     }
+
     //魔力时尚的数据
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setViewMlssData(List<Home.ResultBean.MlssBean> mlss){
-        Log.d("-----",mlss+"");
+    public void setViewMlssData(List<Home.ResultBean.MlssBean> mlss) {
+        showDataKj();
+        Log.d("-----", mlss + "");
         //标题
         home_child_name.setText(mlss.get(0).getName());
         //背景
-        Drawable drawable=getActivity().getResources().getDrawable(R.mipmap.mlss_bitmap);
+        Drawable drawable = getActivity().getResources().getDrawable(R.mipmap.mlss_bitmap);
         home_child_name.setBackground(drawable);
         //文字颜色
         home_child_name.setTextColor(Color.parseColor("#608ed9"));
         //发送请求
-        homeChildPresenter.setPreUrlGet(HttpUrl.HOMECHILD,1003,1,5);
+        homeChildPresenter.setPreUrlGet(HttpUrl.HOMECHILD, 1003, 1, 5);
     }
+
     //品质生活的数据
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void setViewPzshData(List<Home.ResultBean.PzshBean> pzsh ){
+    public void setViewPzshData(List<Home.ResultBean.PzshBean> pzsh) {
+        showDataKj();
         //标题
         home_child_name.setText(pzsh.get(0).getName());
         //背景
-        Drawable drawable=getActivity().getResources().getDrawable(R.mipmap.pzsh_bitmap);
+        Drawable drawable = getActivity().getResources().getDrawable(R.mipmap.pzsh_bitmap);
         home_child_name.setBackground(drawable);
         //文字颜色
         home_child_name.setTextColor(Color.parseColor("#ff7f8d"));
         //发送请求
-        homeChildPresenter.setPreUrlGet(HttpUrl.HOMECHILD,1004,1,5);
+        homeChildPresenter.setPreUrlGet(HttpUrl.HOMECHILD, 1004, 1, 5);
     }
 
 
@@ -113,6 +134,11 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
         home_child_sousuo = (TextView) view.findViewById(R.id.home_child_sousuo);
         home_child_name = (TextView) view.findViewById(R.id.home_child_name);
         home_child_ryl = (RecyclerView) view.findViewById(R.id.home_child_ryl);
+        home_child_failer_image = (ImageView) view.findViewById(R.id.home_child_failer_image);
+        home_child_failer_text = (TextView) view.findViewById(R.id.home_child_failer_text);
+        home_child_failer = (LinearLayout) view.findViewById(R.id.home_child_failer);
+        home_child_name_text = (LinearLayout) view.findViewById(R.id.home_child_name_text);
+        home_child_ryl_line = (LinearLayout) view.findViewById(R.id.home_child_ryl_line);
     }
 
     //搜索方法
@@ -122,7 +148,10 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
         if (TextUtils.isEmpty(edit)) {
             Toast.makeText(getActivity(), "请输入你要搜索的商品", Toast.LENGTH_SHORT).show();
             return;
+        } else {
+            homeChildPresenter.setPreSouSuoData(edit, 1, 5);
         }
+
     }
 
     //EventBus反注册
@@ -133,8 +162,8 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
     }
 
     //接口回调到最大的Fragment来切换fragment
-    public void SetShowHomeMainFragment(ShowHomeMainFragment showHomeMainFragment1){
-        this.showHomeMainFragment=showHomeMainFragment1;
+    public void SetShowHomeMainFragment(ShowHomeMainFragment showHomeMainFragment1) {
+        this.showHomeMainFragment = showHomeMainFragment1;
     }
 
     //请求成功显示数据
@@ -142,7 +171,7 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
     public void OnSuccess(HomeChildBean homeChildBean) {
         //设置适配器
         //设置RecyclerView的布局
-        home_child_ryl.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        home_child_ryl.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         HomeChildAdapter homeChildAdapter = new HomeChildAdapter(getActivity(), homeChildBean.getResult());
         home_child_ryl.setAdapter(homeChildAdapter);
     }
@@ -153,7 +182,38 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
         ToastUtil.Toast(msg);
     }
 
-    public interface ShowHomeMainFragment{
+
+    @Override
+    public void OnHomeChildSousuoSuccess(HomeChildBean homeChildBean) {
+        //搜索到商品的话那么显示数据
+        List<HomeChildBean.ResultBean> result = homeChildBean.getResult();
+        if (result.size() != 0) {
+            home_child_failer.setVisibility(View.GONE);
+            home_child_name_text.setVisibility(View.VISIBLE);
+            home_child_ryl_line.setVisibility(View.VISIBLE);
+            ToastUtil.Toast(homeChildBean.getMessage());
+            home_child_ryl.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            HomeChildAdapter homeChildAdapter = new HomeChildAdapter(getActivity(), homeChildBean.getResult());
+            home_child_ryl.setAdapter(homeChildAdapter);
+        } else {
+            //没有搜索到商品的话那么显示失败图
+            home_child_failer.setVisibility(View.VISIBLE);
+            home_child_name_text.setVisibility(View.GONE);
+            home_child_ryl_line.setVisibility(View.GONE);
+        }
+
+    }
+
+
+    public interface ShowHomeMainFragment {
         void SetShow();
+    }
+
+    //进来页面首先显示控件
+    public void showDataKj() {
+        home_child_edit.setText(null);
+        home_child_failer.setVisibility(View.GONE);
+        home_child_name_text.setVisibility(View.VISIBLE);
+        home_child_ryl_line.setVisibility(View.VISIBLE);
     }
 }

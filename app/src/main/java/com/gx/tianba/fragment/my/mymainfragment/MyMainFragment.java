@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gx.tianba.R;
-import com.gx.tianba.fragment.my.mychildfragment.MyPersonFragment;
+import com.gx.tianba.fragment.my.mychildfragment.myfooter.fragment.MyFooterFragment;
+import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.MyPersonFragment;
+import com.gx.tianba.fragment.my.mychildfragment.mywallet.fragment.MyWalletFragment;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.fresco.FrescoUtil;
 import com.gx.tianba.util.sp.SpUtil;
@@ -53,6 +55,23 @@ public class MyMainFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.my_framelayout,new MyPersonFragment());
+                fragmentTransaction.commit();
+            }
+        });
+        //点击我的足迹转换fragment
+        my_footprint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.my_framelayout,new MyFooterFragment());
+                fragmentTransaction.commit();
+            }
+        });
+        my_wallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.my_framelayout,new MyWalletFragment());
                 fragmentTransaction.commit();
             }
         });

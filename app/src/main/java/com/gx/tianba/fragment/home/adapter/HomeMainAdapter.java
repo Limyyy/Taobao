@@ -173,7 +173,7 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
     public class BannerViewHolder extends RecyclerView.ViewHolder{
         LinearLayout linearLayout;
         ViewPager viewPager;
-        @SuppressLint("HandlerLeak")
+        @SuppressLint({"HandlerLeak", "ClickableViewAccessibility"})
         public BannerViewHolder(@NonNull View itemView) {
             super(itemView);
             viewPager=itemView.findViewById(R.id.home_main_viewpager);
@@ -190,6 +190,24 @@ public class HomeMainAdapter extends RecyclerView.Adapter{
                     }
                 }
             };
+
+            viewPager.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()){
+                        case MotionEvent.ACTION_DOWN:
+                            handler.removeMessages(0);
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            handler.removeMessages(0);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            handler.sendEmptyMessageDelayed(0,2000);
+                            break;
+                    }
+                    return false;
+                }
+            });
         }
     }
     //热销新品
