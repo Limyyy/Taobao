@@ -1,4 +1,4 @@
-package com.gx.tianba.fragment.my.mychildfragment.myfooter.fragment;
+package com.gx.tianba.fragment.my.mychildfragment.myfooter.fragment.fragment;
 
 
 import android.app.Fragment;

@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gx.tianba.R;
-import com.gx.tianba.fragment.my.mychildfragment.myfooter.fragment.MyFooterFragment;
+import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.MyAddressFragment;
+import com.gx.tianba.fragment.my.mychildfragment.myfooter.fragment.fragment.MyFooterFragment;
 import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.MyPersonFragment;
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.fragment.MyWalletFragment;
 import com.gx.tianba.login.bean.Login;
@@ -72,6 +73,14 @@ public class MyMainFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.my_framelayout,new MyWalletFragment());
+                fragmentTransaction.commit();
+            }
+        });
+        my_harvesting_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.my_framelayout,new MyAddressFragment());
                 fragmentTransaction.commit();
             }
         });

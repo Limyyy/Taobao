@@ -1,8 +1,10 @@
 package com.gx.tianba.util.retrofit;
 
 import com.gx.tianba.fragment.home.homechildfragment.bean.HomeChildBean;
+import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myfooter.bean.MyFooter;
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.bean.MyWallet;
+import com.gx.tianba.fragment.search.bean.MyCircle;
 import com.gx.tianba.login.bean.Login;
 
 import retrofit2.http.Field;
@@ -30,4 +32,12 @@ public interface RetrofitService {
     //我的钱包
     @GET("user/verify/v1/findUserWallet")
     Observable<MyWallet> RetrofitMyWallet(@Header("userId")int userId,@Header("sessionId")String sessionId,@Query("page")int page,@Query("count")int count);
+
+    //圈子列表
+    @GET("circle/v1/findCircleList")
+    Observable<MyCircle> RetrofitMyCircle(@Header("userId")int userId,@Header("sessionId")String sessionId,@Query("page")int page,@Query("count")int count);
+
+    //我的收获地址列表
+    @GET("user/verify/v1/receiveAddressList")
+    Observable<MyAddress> RetrofitMyAddress(@Header("userId")String userId, @Header("sessionId")String sessionId);
 }
