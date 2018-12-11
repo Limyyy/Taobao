@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gx.tianba.R;
+import com.gx.tianba.fragment.my.mychildfragment.myaddaddress.fragment.MyAddAddressFragment;
+import com.gx.tianba.fragment.my.mychildfragment.myaddress.adapter.MyAddressListAdapter;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.presenter.MyAddressPresenter;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.view.IMyAddress;
@@ -30,6 +32,7 @@ public class MyAddressFragment extends Fragment implements IMyAddress {
     private TextView my_child_address_complet;
     private RecyclerView my_child_address_ryl;
     private MyAddressPresenter myAddressPresenter;
+    private TextView my_child_address_addaddress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +43,17 @@ public class MyAddressFragment extends Fragment implements IMyAddress {
 
         myAddressPresenter = new MyAddressPresenter(this);
         Login.ResultBean spData = SpUtil.getSpData();
-        myAddressPresenter.setPreAddressListUrl(""+spData.getUserId(),spData.getSessionId());
+        myAddressPresenter.setPreAddressListUrl("" + spData.getUserId(), spData.getSessionId());
+
+        //新增收获地址
+        my_child_address_addaddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.my_framelayout, new MyAddAddressFragment());
+                fragmentTransaction.commit();
+            }
+        });
         return view;
     }
 
@@ -74,11 +87,20 @@ public class MyAddressFragment extends Fragment implements IMyAddress {
     private void initView(View view) {
         my_child_address_complet = (TextView) view.findViewById(R.id.my_child_address_complet);
         my_child_address_ryl = (RecyclerView) view.findViewById(R.id.my_child_address_ryl);
+        my_child_address_addaddress = (TextView) view.findViewById(R.id.my_child_address_addaddress);
     }
 
     @Override
     public void onSuccess(MyAddress myAddress) {
-        my_child_address_ryl.setLayoutManager(new LinearLayoutManager(getActivity(),1,false));
+        my_child_address_ryl.setLayoutManager(new LinearLayoutManager(getActivity(), 1, false));
         List<MyAddress.ResultBean> result = myAddress.getResult();
+        MyAddressListAdapter myAddressListAdapter = new MyAddressListAdapter(result, getActivity());
+        my_child_address_ryl.setAdapter(myAddressListAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        myAddressPresenter.onDestroy();
     }
 }

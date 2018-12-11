@@ -21,13 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gx.tianba.R;
-import com.gx.tianba.fragment.home.PicsoImageLoader;
 import com.gx.tianba.fragment.home.adapter.homemainviewpager.HomeMainViewPagerAdapter;
 import com.gx.tianba.fragment.home.adapter.homemainviewpager.RotationPageTransformer;
 import com.gx.tianba.fragment.home.bean.Home;
-import com.youth.banner.Banner;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,6 +1,7 @@
 package com.gx.tianba.util.retrofit;
 
 import com.gx.tianba.fragment.home.homechildfragment.bean.HomeChildBean;
+import com.gx.tianba.fragment.my.mychildfragment.myaddaddress.bean.MyAddAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myfooter.bean.MyFooter;
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.bean.MyWallet;
@@ -40,4 +41,9 @@ public interface RetrofitService {
     //我的收获地址列表
     @GET("user/verify/v1/receiveAddressList")
     Observable<MyAddress> RetrofitMyAddress(@Header("userId")String userId, @Header("sessionId")String sessionId);
+
+    //新增收货地址
+    @POST("user/verify/v1/addReceiveAddress")
+    @FormUrlEncoded
+    Observable<MyAddAddress>  RetrofitMyAddAddress(@Header("userId") int userId, @Header("sessionId")String sessionId, @Field("realName")String realName, @Field("phone")String phone, @Field("address")String address, @Field("zipCode")String zipCode);
 }

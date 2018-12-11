@@ -1,6 +1,6 @@
-package com.gx.tianba.fragment.my.mychildfragment.myaddress.model;
+package com.gx.tianba.fragment.my.mychildfragment.myaddaddress.model;
 
-import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
+import com.gx.tianba.fragment.my.mychildfragment.myaddaddress.bean.MyAddAddress;
 import com.gx.tianba.util.retrofit.RetrofitService;
 import com.gx.tianba.util.retrofit.RetrofitUtil;
 
@@ -9,17 +9,17 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MyAddressModel {
+public class MyAddAddressMod {
 
     private RetrofitService anInterface;
 
-    public void setModAddressListUrl(String userId, String sessionId, final CallBack callBack){
+    public void setModMyAddAddressUrl(int userId, String sessionId, String realName, String phone, String address, String zipCode, final CallBack callBack){
         anInterface = RetrofitUtil.getInstance().getInterface(RetrofitService.class);
-        Observable<MyAddress> myAddressObservable = anInterface.RetrofitMyAddress(userId, sessionId);
-        myAddressObservable
+        Observable<MyAddAddress> myAddAddressObservable = anInterface.RetrofitMyAddAddress(userId, sessionId, realName, phone, address, zipCode);
+        myAddAddressObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MyAddress>() {
+                .subscribe(new Subscriber<MyAddAddress>() {
                     @Override
                     public void onCompleted() {
 
@@ -31,14 +31,14 @@ public class MyAddressModel {
                     }
 
                     @Override
-                    public void onNext(MyAddress myAddress) {
-                        callBack.onSuccess(myAddress);
+                    public void onNext(MyAddAddress myAddAddress) {
+                        callBack.onSuccess(myAddAddress);
                     }
                 });
     }
 
     public interface CallBack{
-        void onSuccess(MyAddress myAddress);
+        void onSuccess(MyAddAddress myAddAddress);
     }
 
     public void onDestroy(){

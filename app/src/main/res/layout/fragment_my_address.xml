@@ -40,6 +40,24 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_child_address_ryl"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/my_child_address_addaddress"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:background="#fa6f92"
+            android:layout_width="150dp"
+            android:textColor="#fff"
+            android:text="新增收获地址"
+            android:layout_height="40dp" />
+    </LinearLayout>
 
 </LinearLayout>
