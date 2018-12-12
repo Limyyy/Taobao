@@ -14,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.MyAddressFragment;
 import com.gx.tianba.fragment.my.mychildfragment.myfooter.fragment.fragment.MyFooterFragment;
+import com.gx.tianba.fragment.my.mychildfragment.mygroup.fragment.MyGroupFragment;
 import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.MyPersonFragment;
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.fragment.MyWalletFragment;
 import com.gx.tianba.login.bean.Login;
@@ -38,6 +39,7 @@ public class MyMainFragment extends Fragment {
     private LinearLayout my_harvesting_address;
     private LinearLayout relb;
     private SimpleDraweeView my_circle_ImageView;
+    private LinearLayout my_group;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,13 +51,14 @@ public class MyMainFragment extends Fragment {
         //得到保存的数据
         Login.ResultBean spData = SpUtil.getSpData();
         //设置头像
-        FrescoUtil.load(spData.getHeadPic(),my_circle_ImageView);
+        FrescoUtil.load(spData.getHeadPic(), my_circle_ImageView);
+        my_text_content.setText(spData.getNickName());
         //点击个人资料转换fragment
         my_personal_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.my_framelayout,new MyPersonFragment());
+                fragmentTransaction.replace(R.id.my_framelayout, new MyPersonFragment());
                 fragmentTransaction.commit();
             }
         });
@@ -64,28 +67,39 @@ public class MyMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.my_framelayout,new MyFooterFragment());
+                fragmentTransaction.replace(R.id.my_framelayout, new MyFooterFragment());
                 fragmentTransaction.commit();
             }
         });
+        //我的钱包
         my_wallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.my_framelayout,new MyWalletFragment());
+                fragmentTransaction.replace(R.id.my_framelayout, new MyWalletFragment());
                 fragmentTransaction.commit();
             }
         });
+        //我的收货地址
         my_harvesting_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.my_framelayout,new MyAddressFragment());
+                fragmentTransaction.hide(MyMainFragment.this);
+                fragmentTransaction.add(R.id.my_framelayout, new MyAddressFragment(), "myaddress");
+                fragmentTransaction.addToBackStack("myaddress");
                 fragmentTransaction.commit();
             }
         });
-
-
+        //我的圈子
+        my_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.my_framelayout, new MyGroupFragment());
+                fragmentTransaction.commit();
+            }
+        });
 
         return view;
     }
@@ -104,5 +118,6 @@ public class MyMainFragment extends Fragment {
         my_harvesting_address = (LinearLayout) view.findViewById(R.id.my_harvesting_address);
         relb = (LinearLayout) view.findViewById(R.id.relb);
         my_circle_ImageView = (SimpleDraweeView) view.findViewById(R.id.my_circle_ImageView);
+        my_group = (LinearLayout) view.findViewById(R.id.my_group);
     }
 }

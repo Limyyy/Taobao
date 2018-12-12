@@ -146,32 +146,6 @@ public class MyAddressUpdateFragment extends Fragment implements IMyAddressUpdat
         String trim = my_address_update_address.getText().toString().trim();
         myAddressUpdatePre.setPreMyAddressUpdate(spData.getUserId(),spData.getSessionId(),name,phone,trim+" "+detail,postcode);
     }
-    /**
-     * 返回键重定义
-     */
-    private void getFocus() {
-        //设置焦点联系方式(正确的)
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.my_framelayout, new MyAddressFragment());
-                    fragmentTransaction.commit();
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getFocus();
-    }
 
     @Override
     public void onDestroy() {

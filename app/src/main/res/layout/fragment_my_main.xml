@@ -73,6 +73,8 @@
                 android:src="@mipmap/my_icon_circle_n_xxhdpi" />
 
             <LinearLayout
+                android:descendantFocusability="blocksDescendants"
+                android:id="@+id/my_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

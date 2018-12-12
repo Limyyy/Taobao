@@ -56,6 +56,7 @@ public class MyAddressFragment extends Fragment implements IMyAddress {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.hide(MyAddressFragment.this);
                 fragmentTransaction.add(R.id.my_framelayout, new MyAddAddressFragment(),"add");
                 fragmentTransaction.addToBackStack("add");
                 fragmentTransaction.commit();
@@ -76,33 +77,6 @@ public class MyAddressFragment extends Fragment implements IMyAddress {
             }
         });
         return view;
-    }
-
-    /**
-     * 返回键重定义
-     */
-    private void getFocus() {
-        //设置焦点联系方式(正确的)
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.my_framelayout, new MyMainFragment());
-                    fragmentTransaction.commit();
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getFocus();
     }
 
     private void initView(View view) {
@@ -149,6 +123,7 @@ public class MyAddressFragment extends Fragment implements IMyAddress {
                 MyAddressUpdateFragment.getInstace(resultBean);
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 fragmentTransaction.add(R.id.my_framelayout, new MyAddressUpdateFragment(),"update");
+                fragmentTransaction.hide(MyAddressFragment.this);
                 fragmentTransaction.addToBackStack("update");
                 fragmentTransaction.commit();
             }

@@ -2,6 +2,7 @@ package com.gx.tianba.fragment.search.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,13 +58,13 @@ public class MyCircleAdapter extends RecyclerView.Adapter<MyCircleAdapter.MyCirc
         if (i1==-1) {
             String[] images={image};
             MyCircleImageAdapter myCircleImageAdapter = new MyCircleImageAdapter(images, context);
-            myCircleViewHolder.my_circle_childimage_ryl.setLayoutManager(new LinearLayoutManager(context,0,false));
+            myCircleViewHolder.my_circle_childimage_ryl.setLayoutManager(new GridLayoutManager(context,3));
             myCircleViewHolder.my_circle_childimage_ryl.setAdapter(myCircleImageAdapter);
         }
         else {
             String[] strings = image.split(",");
             MyCircleImageAdapter myCircleImageAdapter = new MyCircleImageAdapter(strings, context);
-            myCircleViewHolder.my_circle_childimage_ryl.setLayoutManager(new LinearLayoutManager(context,0,false));
+            myCircleViewHolder.my_circle_childimage_ryl.setLayoutManager(new GridLayoutManager(context,3));
             myCircleViewHolder.my_circle_childimage_ryl.setAdapter(myCircleImageAdapter);
         }
 

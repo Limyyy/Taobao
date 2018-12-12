@@ -30,7 +30,7 @@ public class MyCircleImageAdapter extends RecyclerView.Adapter<MyCircleImageAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyCircleImageViewHolder myCircleImageViewHolder, int i) {
+    public void onBindViewHolder(@NonNull MyCircleImageViewHolder myCircleImageViewHolder, int i){
         String s = iamges[i];
         FrescoUtil.load(s,myCircleImageViewHolder.my_circle_item_image_one);
     }
