@@ -1,8 +1,10 @@
 package com.gx.tianba.fragment.my.mychildfragment.myaddress.model;
 
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
+import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.retrofit.RetrofitService;
 import com.gx.tianba.util.retrofit.RetrofitUtil;
+import com.gx.tianba.util.sp.SpUtil;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -37,7 +39,37 @@ public class MyAddressModel {
                 });
     }
 
+    public void setPreAddressDefault(int id, final CallBackTwo callBackTwo){
+        Login.ResultBean spData = SpUtil.getSpData();
+        Observable<MyAddress> myAddressObservable = anInterface.RetrofitDefault(spData.getUserId(), spData.getSessionId(), id);
+        myAddressObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<MyAddress>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(MyAddress myAddress) {
+                        callBackTwo.onSuccess(myAddress);
+                    }
+                });
+    }
+
+
+
     public interface CallBack{
+        void onSuccess(MyAddress myAddress);
+    }
+    //设置默认地址
+    public interface CallBackTwo{
         void onSuccess(MyAddress myAddress);
     }
 

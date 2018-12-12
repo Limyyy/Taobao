@@ -18,6 +18,7 @@ public class MyAddressListAdapter extends RecyclerView.Adapter<MyAddressListAdap
 
     private List<MyAddress.ResultBean> result;
     private Context context;
+    private OnDefaultAddress onDefaultAddress;
 
     public MyAddressListAdapter(List<MyAddress.ResultBean> result, Context context) {
         this.result = result;
@@ -32,8 +33,8 @@ public class MyAddressListAdapter extends RecyclerView.Adapter<MyAddressListAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyAddressListViewHolder myAddressListViewHolder, int i) {
-        MyAddress.ResultBean resultBean = result.get(i);
+    public void onBindViewHolder(@NonNull final MyAddressListViewHolder myAddressListViewHolder, int i) {
+        final MyAddress.ResultBean resultBean = result.get(i);
         //默认收获地址
         int whetherDefault = resultBean.getWhetherDefault();
         if (whetherDefault==1){
@@ -48,6 +49,21 @@ public class MyAddressListAdapter extends RecyclerView.Adapter<MyAddressListAdap
         myAddressListViewHolder.my_child_address_item_phone.setText(resultBean.getPhone());
         //地址
         myAddressListViewHolder.my_child_address_item_address.setText(resultBean.getAddress());
+
+        //点击设置默认收货地址
+        myAddressListViewHolder.my_child_address_item_checkbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDefaultAddress.defaultAddressClick(resultBean.getId());
+            }
+        });
+        //点击修改收货地址
+        myAddressListViewHolder.my_child_address_item_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onDefaultAddress.updateAddressClick(resultBean);
+            }
+        });
     }
 
     @Override
@@ -70,5 +86,17 @@ public class MyAddressListAdapter extends RecyclerView.Adapter<MyAddressListAdap
             my_child_address_item_delete=itemView.findViewById(R.id.my_child_address_item_delete);
             my_child_address_item_checkbox=itemView.findViewById(R.id.my_child_address_item_checkbox);
         }
+
+    }
+
+    public void setOnDefaultAddress(OnDefaultAddress onDefaultAddress1){
+        this.onDefaultAddress=onDefaultAddress1;
+    }
+
+    public interface OnDefaultAddress{
+        void defaultAddressClick(int id);
+        void deleleAddressClick(int id);
+
+        void updateAddressClick(MyAddress.ResultBean resultBean);
     }
 }

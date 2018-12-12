@@ -21,6 +21,14 @@ public class MyAddressPresenter {
             }
         });
     }
+    public void setPreAddressDefault(int id){
+        myAddressModel.setPreAddressDefault(id, new MyAddressModel.CallBackTwo() {
+            @Override
+            public void onSuccess(MyAddress myAddress) {
+                iMyAddress.onDefault(myAddress);
+            }
+        });
+    }
 
     public void onDestroy(){
         if (myAddressModel!=null) {
