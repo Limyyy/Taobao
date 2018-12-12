@@ -43,38 +43,6 @@ public class HomeModel {
 
             }
         }),bannershow);
-
-        /*OkHttpUtils.enqueueGet(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.code()==200){
-                    String trim = response.body().string().trim();
-                    Gson gson=new Gson();
-                    final Banner banner = gson.fromJson(trim, Banner.class);
-                    //解析完banner后再去请求home
-                    OkHttpUtils.enqueueGet(new Callback() {
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-
-                        }
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-                            if (response.code()==200){
-                                String trim = response.body().string().trim();
-                                Gson gson=new Gson();
-                                Home home = gson.fromJson(trim, Home.class);
-                                callBack.backData(banner,home);
-                            }
-                        }
-                    },homelistdata);
-                }
-            }
-        },bannershow);*/
     }
 
     public interface CallBack{

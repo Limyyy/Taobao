@@ -187,6 +187,8 @@ public class MyGroupFragment extends Fragment implements IMyGroup {
     public void onDeleteSuccess(MyGroup myGroup) {
         ToastUtil.Toast(myGroup.getMessage());
         Login.ResultBean spData = SpUtil.getSpData();
+        flag=true;
+        my_group_setting.setText("编辑");
         idsSum=new String();
         myGroupPresenter.setPreMyGroup(spData.getUserId(),spData.getSessionId(),1,5);
     }

@@ -68,4 +68,13 @@ public interface RetrofitService {
     //删除我的圈子
     @DELETE("circle/verify/v1/deleteCircle")
     Observable<MyGroup> RetrofitMyGroupDelete(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("circleId")String circleId);
+
+    //圈子列表点赞
+    @POST("circle/verify/v1/addCircleGreat")
+    @FormUrlEncoded
+    Observable<MyCircle> RetrofitMyCircleGreat(@Header("userId")int userId, @Header("sessionId")String sessionId,@Field("circleId")int circleId);
+
+    //圈子列表取消点赞
+    @DELETE("circle/verify/v1/cancelCircleGreat")
+    Observable<MyCircle> RetrofitMyCircleNoGreat(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("circleId")int circleId);
 }

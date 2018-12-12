@@ -38,9 +38,55 @@ public class MyCircleModel {
                 });
     }
 
+    public void setPreGreatCircleUrl(int userId, String sessionId, int circleId, final CallBack callBack){
+        Observable<MyCircle> myCircleObservable = anInterface.RetrofitMyCircleGreat(userId, sessionId, circleId);
+        myCircleObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<MyCircle>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(MyCircle myCircle) {
+                        callBack.onGreatSuccess(myCircle);
+                    }
+                });
+    }
+    public void setPreGreatNoCircleUrl(int userId, String sessionId, int circleId, final CallBack callBack){
+        Observable<MyCircle> myCircleObservable = anInterface.RetrofitMyCircleNoGreat(userId, sessionId, circleId);
+        myCircleObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<MyCircle>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(MyCircle myCircle) {
+                        callBack.onNoGreatSuccess(myCircle);
+                    }
+                });
+    }
     public interface CallBack{
         void onSuccess(MyCircle myCircle);
         void onFailer(String msg);
+        void onGreatSuccess(MyCircle myCircle);
+        void onNoGreatSuccess(MyCircle myCircle);
     }
 
     public void onDestroy() {
