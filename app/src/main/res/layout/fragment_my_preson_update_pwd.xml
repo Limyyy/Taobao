@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.my.mychildfragment.myperson.fragment.update.updatepwd.fragment.MyPresonUpdatePwdFragment">
+    android:orientation="vertical"
+    tools:context=".fragment.my.mychildfragment.myperson.fragment.update.updatename.fragment.MyPersonUpdateNameFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="修改密码"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
 
-</FrameLayout>
+    <EditText
+        android:layout_marginTop="15dp"
+        android:id="@+id/my_person_update_pwd_edit_old"
+        android:hint="请输入旧密码"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <EditText
+        android:layout_marginTop="15dp"
+        android:id="@+id/my_person_update_pwd_edit_new"
+        android:hint="请输入新密码"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <android.support.v4.widget.Space
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/my_person_update_pwd_edit_commit"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:background="#fa6f92"
+            android:layout_width="150dp"
+            android:textColor="#fff"
+            android:text="保存并使用"
+            android:layout_height="40dp" />
+    </LinearLayout>
+</LinearLayout>

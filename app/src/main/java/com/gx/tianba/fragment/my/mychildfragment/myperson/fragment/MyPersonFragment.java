@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.update.updatename.fragment.MyPersonUpdateNameFragment;
+import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.update.updatepwd.fragment.MyPresonUpdatePwdFragment;
 import com.gx.tianba.fragment.my.mymainfragment.MyMainFragment;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.ToastUtil;
@@ -55,6 +56,17 @@ public class MyPersonFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.my_framelayout, new MyPersonUpdateNameFragment(),"UpdateName");
                 fragmentTransaction.addToBackStack("UpdateName");
+                fragmentTransaction.commit();
+            }
+        });
+
+        //点击修改密码
+        chile_my_person_password_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.my_framelayout, new MyPresonUpdatePwdFragment(),"UpdatePwd");
+                fragmentTransaction.addToBackStack("UpdatePwd");
                 fragmentTransaction.commit();
             }
         });
