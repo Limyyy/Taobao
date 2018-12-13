@@ -82,4 +82,8 @@ public interface RetrofitService {
     //修改昵称
     @PUT("user/verify/v1/modifyUserNick")
     Observable<MyPersonUpdate> RetrofitMyPersonUpdateName(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("nickName")String nickName);
+
+    //修改密码
+    @PUT("user/verify/v1/modifyUserPwd")
+    Observable<MyPersonUpdate> RetrofitMyPersonUpdatePwd(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("oldPwd")String editOld,@Query("newPwd")String editNew);
 }

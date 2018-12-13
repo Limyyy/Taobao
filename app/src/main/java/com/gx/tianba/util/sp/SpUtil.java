@@ -66,4 +66,9 @@ public class SpUtil {
         edit.putString("nickName",newName);
         edit.commit();
     }
+    public static void updatePwd(String Pwd){
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("password",Pwd);
+        edit.commit();
+    }
 }
