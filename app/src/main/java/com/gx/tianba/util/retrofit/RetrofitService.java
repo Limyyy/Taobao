@@ -6,6 +6,7 @@ import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.bean.MyAddressUpdate;
 import com.gx.tianba.fragment.my.mychildfragment.myfooter.bean.MyFooter;
 import com.gx.tianba.fragment.my.mychildfragment.mygroup.bean.MyGroup;
+import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.update.bean.MyPersonUpdate;
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.bean.MyWallet;
 import com.gx.tianba.fragment.search.bean.MyCircle;
 import com.gx.tianba.login.bean.Login;
@@ -77,4 +78,8 @@ public interface RetrofitService {
     //圈子列表取消点赞
     @DELETE("circle/verify/v1/cancelCircleGreat")
     Observable<MyCircle> RetrofitMyCircleNoGreat(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("circleId")int circleId);
+
+    //修改昵称
+    @PUT("user/verify/v1/modifyUserNick")
+    Observable<MyPersonUpdate> RetrofitMyPersonUpdateName(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("nickName")String nickName);
 }

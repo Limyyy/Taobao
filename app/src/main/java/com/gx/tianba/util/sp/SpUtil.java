@@ -16,13 +16,15 @@ public class SpUtil {
     static Context context=App.TAG;
     private static SharedPreferences sp;
     private static Login.ResultBean result;
+    private static Login login;
     public static  void initSp(){
         sp = context.getSharedPreferences("login", MODE_PRIVATE);
         result=new Login.ResultBean();
+        login=new Login();
     }
     public static void putSpData(Login login,boolean islogin,String name,String password){
         SharedPreferences.Editor edit = sp.edit();
-        edit.putBoolean("islogin", true);
+        edit.putBoolean("islogin", islogin);
         edit.putString("name", name);
         edit.putString("password", password);
 
@@ -54,5 +56,14 @@ public class SpUtil {
         result.setPhone(phone);
         result.setPassword(password);
         return result;
+    }
+    public static boolean getIslogin(){
+        return sp.getBoolean("islogin",false);
+    }
+
+    public static void updateName(String newName){
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("nickName",newName);
+        edit.commit();
     }
 }

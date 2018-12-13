@@ -136,6 +136,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (remember.isChecked()){
             SpUtil.putSpData(login,true,edName.getText().toString().trim(),edPwd.getText().toString().trim());
         }
+        else {
+            SpUtil.putSpData(login,false,edName.getText().toString().trim(),edPwd.getText().toString().trim());
+        }
             //保存之后跳转
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
