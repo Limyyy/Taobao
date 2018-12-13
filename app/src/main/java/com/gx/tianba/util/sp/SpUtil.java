@@ -71,4 +71,9 @@ public class SpUtil {
         edit.putString("password",Pwd);
         edit.commit();
     }
+    public static void updateHeadPic(String imageUrl){
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("headPic",imageUrl);
+        edit.commit();
+    }
 }

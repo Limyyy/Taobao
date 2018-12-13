@@ -6,18 +6,25 @@ import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.bean.MyAddressUpdate;
 import com.gx.tianba.fragment.my.mychildfragment.myfooter.bean.MyFooter;
 import com.gx.tianba.fragment.my.mychildfragment.mygroup.bean.MyGroup;
+import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.up.bean.MyPersonUpImage;
 import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.update.bean.MyPersonUpdate;
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.bean.MyWallet;
 import com.gx.tianba.fragment.search.bean.MyCircle;
 import com.gx.tianba.login.bean.Login;
 
+import java.io.File;
+
+import okhttp3.MultipartBody;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -86,4 +93,9 @@ public interface RetrofitService {
     //修改密码
     @PUT("user/verify/v1/modifyUserPwd")
     Observable<MyPersonUpdate> RetrofitMyPersonUpdatePwd(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("oldPwd")String editOld,@Query("newPwd")String editNew);
+
+    //上传头像
+    @Multipart
+    @POST("user/verify/v1/modifyHeadPic")
+    Observable<MyPersonUpImage> RetrofitMyPersonUpImage(@Header("userId")int userId, @Header("sessionId")String sessionId,  @Part MultipartBody.Part image);
 }

@@ -3,7 +3,10 @@ package com.gx.tianba.fragment.my.mychildfragment.mygroup.fragment;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
