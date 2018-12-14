@@ -13,8 +13,8 @@ public class MyAddressUpdatePre {
         myAddressUpdateMod=new MyAddressUpdateMod();
     }
 
-    public void setPreMyAddressUpdate(int userId,String sessionId,String realName,String phone,String address,String zipCode){
-        myAddressUpdateMod.setModMyAddressUpdate(userId, sessionId, realName, phone, address, zipCode, new MyAddressUpdateMod.CallBack() {
+    public void setPreMyAddressUpdate(int userId,String sessionId,int id,String realName,String phone,String address,String zipCode){
+        myAddressUpdateMod.setModMyAddressUpdate(userId, sessionId,id, realName, phone,address, zipCode, new MyAddressUpdateMod.CallBack() {
             @Override
             public void onSuccess(MyAddressUpdate myAddressUpdate) {
                 iMyAddressUpdate.onSuccess(myAddressUpdate);

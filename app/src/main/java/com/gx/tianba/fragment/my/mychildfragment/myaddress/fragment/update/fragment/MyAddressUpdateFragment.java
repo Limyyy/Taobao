@@ -2,11 +2,9 @@ package com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.frag
 
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
-import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.MyAddressFragment;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.bean.MyAddressUpdate;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.presenter.MyAddressUpdatePre;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.view.IMyAddressUpdate;
@@ -144,7 +141,7 @@ public class MyAddressUpdateFragment extends Fragment implements IMyAddressUpdat
         }
         Login.ResultBean spData = SpUtil.getSpData();
         String trim = my_address_update_address.getText().toString().trim();
-        myAddressUpdatePre.setPreMyAddressUpdate(spData.getUserId(),spData.getSessionId(),name,phone,trim+" "+detail,postcode);
+        myAddressUpdatePre.setPreMyAddressUpdate(spData.getUserId(),spData.getSessionId(),resultBean.getId(),name,phone,trim+" "+detail,postcode);
     }
 
     @Override

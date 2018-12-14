@@ -13,6 +13,7 @@ import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.update.bean.M
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.bean.MyWallet;
 import com.gx.tianba.fragment.search.bean.MyCircle;
 import com.gx.tianba.fragment.shopping.bean.Shopping;
+import com.gx.tianba.fragment.shopping.submit.bean.ShoppingSubmit;
 import com.gx.tianba.login.bean.Login;
 
 import java.io.File;
@@ -70,7 +71,7 @@ public interface RetrofitService {
     //修改收货地址
     @PUT("user/verify/v1/changeReceiveAddress")
     @FormUrlEncoded
-    Observable<MyAddressUpdate>  RetrofitMyAddressUpdate(@Header("userId") int userId, @Header("sessionId")String sessionId, @Field("realName")String realName, @Field("phone")String phone, @Field("address")String address, @Field("zipCode")String zipCode);
+    Observable<MyAddressUpdate>  RetrofitMyAddressUpdate(@Header("userId") int userId, @Header("sessionId")String sessionId,@Field("id")int id,@Field("realName")String realName, @Field("phone")String phone, @Field("address")String address, @Field("zipCode")String zipCode);
 
     //我的圈子列表
     @GET("circle/verify/v1/findMyCircleById")
@@ -113,4 +114,9 @@ public interface RetrofitService {
     //购物车列表
     @GET("order/verify/v1/findShoppingCart")
     Observable<Shopping> RetrofitShoppingList(@Header("userId")int userId, @Header("sessionId")String sessionId);
+
+    //创建订单
+    @POST("order/verify/v1/createOrder")
+    @FormUrlEncoded
+    Observable<ShoppingSubmit> retrofitShoppingSubmit(@Header("userId")int userId, @Header("sessionId")String sessionId, @Field("totalPrice")double totalPrice, @Field("addressId")int addressId, @Field("orderInfo")String orderInfo);
 }

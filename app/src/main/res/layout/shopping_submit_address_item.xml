@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#9b9999"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:background="#9b9999"
+        android:orientation="horizontal"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:layout_weight="3"
+            android:background="#9b9999"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="#9b9999"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/shopping_submit_address_item_name"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="#fff"
+                    android:background="#9b9999"
+                    android:text="王小帅"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <android.support.v4.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#9b9999"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/shopping_submit_address_item_phone"
+                    android:layout_marginRight="20dp"
+                    android:textColor="#fff"
+                    android:background="#9b9999"
+                    android:text="15010746214"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/shopping_submit_address_item_address"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#fff"
+                android:background="@null"
+                android:text="爱的隔离开关的实力反倒是看fsd fsd as da 来开始给废了"
+                android:layout_width="300dp"
+                android:layout_height="50dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="80dp"
+            android:background="#c3c3c3"/>
+        <TextView
+            android:id="@+id/shopping_submit_address_item_select"
+            android:textColor="#d21818"
+            android:gravity="center"
+            android:background="@null"
+            android:layout_weight="1"
+            android:text="选择"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:background="#c3c3c3"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

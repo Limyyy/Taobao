@@ -1,6 +1,7 @@
 package com.gx.tianba;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -142,6 +143,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.main_my:
                 viewpager.setCurrentItem(4);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==0){
+            if (resultCode==1){
+                viewpager.setCurrentItem(3);
+            }
         }
     }
 }

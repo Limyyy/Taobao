@@ -14,9 +14,9 @@ public class MyAddressUpdateMod {
 
     private RetrofitService anInterface;
 
-    public void setModMyAddressUpdate(int userId, String sessionId, String realName, String phone, String address, String zipCode, final CallBack callBack){
+    public void setModMyAddressUpdate(int userId, String sessionId,int id, String realName, String phone, String address, String zipCode, final CallBack callBack){
         anInterface = RetrofitUtil.getInstance().getInterface(RetrofitService.class);
-        Observable<MyAddressUpdate> myAddAddressObservable = anInterface.RetrofitMyAddressUpdate(userId, sessionId, realName, phone, address, zipCode);
+        Observable<MyAddressUpdate> myAddAddressObservable = anInterface.RetrofitMyAddressUpdate(userId, sessionId,id,realName, phone, address, zipCode);
         myAddAddressObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

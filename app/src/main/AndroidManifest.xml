@@ -39,6 +39,10 @@
         <activity
             android:name=".regis.activity.RegisterActivity"
             android:label="@string/title_activity_register"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".fragment.shopping.submit.activity.ShoppingSubmitActivity"
+            android:label="@string/title_activity_shopping_submit"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

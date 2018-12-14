@@ -29,12 +29,12 @@ public class MyView extends LinearLayout {
         jian=findViewById(R.id.jian);
         num=findViewById(R.id.num);
     }
-    public void setNum(String str) {
-        num.setText(str);
+    public void setNum(int str) {
+        num.setText(""+str);
     }
 
-    public String getNum() {
-        return num.getText().toString();
+    public int getNum() {
+        return Integer.parseInt(num.getText().toString());
     }
 
     //接口回调

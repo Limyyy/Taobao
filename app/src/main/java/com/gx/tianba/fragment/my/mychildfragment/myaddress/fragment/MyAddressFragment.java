@@ -122,7 +122,7 @@ public class MyAddressFragment extends Fragment implements IMyAddress {
             public void updateAddressClick(MyAddress.ResultBean resultBean){
                 MyAddressUpdateFragment.getInstace(resultBean);
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-                fragmentTransaction.add(R.id.my_framelayout, new MyAddressUpdateFragment(),"update");
+                fragmentTransaction.replace(R.id.my_framelayout, new MyAddressUpdateFragment(),"update");
                 fragmentTransaction.hide(MyAddressFragment.this);
                 fragmentTransaction.addToBackStack("update");
                 fragmentTransaction.commit();
