@@ -122,6 +122,8 @@ public class MyPersonFragment extends Fragment implements IMyPersonUpImage {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,1);
             }
         });
         //相册
@@ -187,7 +189,16 @@ public class MyPersonFragment extends Fragment implements IMyPersonUpImage {
                 //打开手机的相册
                 Uri uri = data.getData();
                 //得到图片的绝对路径
-                String path1 = ImageUtil.getPath(getActivity(), uri);
+                String path = ImageUtil.getPath(getActivity(), uri);
+                file=new File(path);
+                //上传头像
+                myPersonUpImagePre.setPreMyPersonUpImageUrl(userId,sessionId,file);
+                break;
+            case 1:
+                Uri camaraUri = data.getData();
+                //得到图片的绝对路径
+                String path1 = ImageUtil.getPath(getActivity(), camaraUri);
+                file=new File(path1);
                 //上传头像
                 myPersonUpImagePre.setPreMyPersonUpImageUrl(userId,sessionId,file);
                 break;

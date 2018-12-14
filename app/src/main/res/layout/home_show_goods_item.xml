@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v4.view.ViewPager
+        android:layout_margin="10dp"
+        android:id="@+id/home_show_goods_item_viewpager"
+        android:layout_width="380dp"
+        android:layout_height="150dp"></android.support.v4.view.ViewPager>
+
+    <TextView
+        android:background="@drawable/home_viewpager_page_radius"
+        android:text="1/5"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="110dp"
+        android:id="@+id/home_show_goods_item_viewpager_page"
+        android:layout_width="60dp"
+        android:layout_height="30dp" />
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/home_show_goods_item_viewpager"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="22dp"
+                android:textColor="#f00"
+                android:text="2665"
+                android:id="@+id/home_show_goods_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <android.support.v4.widget.Space
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/home_show_goods_item_saleNum"
+                android:layout_marginTop="-5dp"
+                android:text="已售116565件"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="开发了考虑过健康的方式就是感慨地说说得更加快乐福建省看到了"
+            android:id="@+id/home_show_goods_item_commodityName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:text="0.089kg"
+            android:id="@+id/home_show_goods_item_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

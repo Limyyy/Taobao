@@ -12,6 +12,8 @@ import com.gx.tianba.R;
 import com.gx.tianba.fragment.home.bean.Home;
 import com.gx.tianba.fragment.home.homechildfragment.HomeChildFragment;
 import com.gx.tianba.fragment.home.homemainfragment.HomeMainFragment;
+import com.gx.tianba.fragment.home.homeshowfragment.fragment.HomeShowFragment;
+import com.gx.tianba.fragment.home.homeshowfragment.bean.ShowEventBus;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -22,6 +24,7 @@ public class HomeFragment extends Fragment {
 
     private HomeChildFragment homeChildFragment;
     private HomeMainFragment homeMainFragment;
+    private HomeShowFragment homeShowFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,10 +35,13 @@ public class HomeFragment extends Fragment {
         FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
         homeMainFragment = new HomeMainFragment();
         homeChildFragment = new HomeChildFragment();
+        homeShowFragment = new HomeShowFragment();
         fragmentTransaction.add(R.id.home_framelayout, homeMainFragment);
         fragmentTransaction.add(R.id.home_framelayout,homeChildFragment);
+        fragmentTransaction.add(R.id.home_framelayout,homeShowFragment);
         fragmentTransaction.show(homeMainFragment);
         fragmentTransaction.hide(homeChildFragment);
+        fragmentTransaction.hide(homeShowFragment);
         fragmentTransaction.commit();
 
         homeMainFragment.JumpHomeChildGetData(new HomeMainFragment.JumpHomeChildSetData() {
@@ -44,6 +50,7 @@ public class HomeFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 fragmentTransaction.show(homeChildFragment);
                 fragmentTransaction.hide(homeMainFragment);
+                fragmentTransaction.hide(homeShowFragment);
                 fragmentTransaction.commit();
                 switch (type){
                     case 1:
@@ -71,10 +78,34 @@ public class HomeFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
                 fragmentTransaction.hide(homeChildFragment);
                 fragmentTransaction.show(homeMainFragment);
+                fragmentTransaction.hide(homeShowFragment);
                 fragmentTransaction.commit();
             }
         });
 
+        homeChildFragment.setHomeChildFragmentCallBack(new HomeChildFragment.HomeChildFragmentCallBack() {
+            @Override
+            public void callback(int commodityId) {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.hide(homeChildFragment);
+                fragmentTransaction.hide(homeMainFragment);
+                fragmentTransaction.show(homeShowFragment);
+                fragmentTransaction.commit();
+                ShowEventBus showEventBus=new ShowEventBus();
+                showEventBus.setCommodityId(commodityId);
+                EventBus.getDefault().post(showEventBus);
+            }
+        });
+        homeShowFragment.setHomeShowFragmentCallBack(new HomeShowFragment.HomeShowFragmentCallBack() {
+            @Override
+            public void callback() {
+                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
+                fragmentTransaction.show(homeChildFragment);
+                fragmentTransaction.hide(homeMainFragment);
+                fragmentTransaction.hide(homeShowFragment);
+                fragmentTransaction.commit();
+            }
+        });
         return view;
     }
 

@@ -50,6 +50,9 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
     private LinearLayout home_child_failer;
     private LinearLayout home_child_name_text;
     private LinearLayout home_child_ryl_line;
+    private HomeChildAdapter homeChildAdapter;
+    private HomeChildFragmentCallBack homeChildFragmentCallBack;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +79,7 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
                 submit();
             }
         });
+
         return view;
     }
 
@@ -174,6 +178,13 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
         home_child_ryl.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         HomeChildAdapter homeChildAdapter = new HomeChildAdapter(getActivity(), homeChildBean.getResult());
         home_child_ryl.setAdapter(homeChildAdapter);
+
+        homeChildAdapter.setOnItemClickListner(new HomeChildAdapter.OnItemClickListner() {
+            @Override
+            public void click(int id) {
+                homeChildFragmentCallBack.callback(id);
+            }
+        });
     }
 
     //请求失败吐司
@@ -187,13 +198,13 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
     public void OnHomeChildSousuoSuccess(HomeChildBean homeChildBean) {
         //搜索到商品的话那么显示数据
         List<HomeChildBean.ResultBean> result = homeChildBean.getResult();
-        if (result.size() != 0) {
+        if (result.size()!= 0) {
             home_child_failer.setVisibility(View.GONE);
             home_child_name_text.setVisibility(View.VISIBLE);
             home_child_ryl_line.setVisibility(View.VISIBLE);
             ToastUtil.Toast(homeChildBean.getMessage());
             home_child_ryl.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-            HomeChildAdapter homeChildAdapter = new HomeChildAdapter(getActivity(), homeChildBean.getResult());
+            homeChildAdapter = new HomeChildAdapter(getActivity(), homeChildBean.getResult());
             home_child_ryl.setAdapter(homeChildAdapter);
         } else {
             //没有搜索到商品的话那么显示失败图
@@ -201,9 +212,14 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
             home_child_name_text.setVisibility(View.GONE);
             home_child_ryl_line.setVisibility(View.GONE);
         }
+        homeChildAdapter.setOnItemClickListner(new HomeChildAdapter.OnItemClickListner() {
+            @Override
+            public void click(int id) {
+                homeChildFragmentCallBack.callback(id);
+            }
+        });
 
     }
-
 
     public interface ShowHomeMainFragment {
         void SetShow();
@@ -215,5 +231,13 @@ public class HomeChildFragment extends Fragment implements IHomeChildView {
         home_child_failer.setVisibility(View.GONE);
         home_child_name_text.setVisibility(View.VISIBLE);
         home_child_ryl_line.setVisibility(View.VISIBLE);
+    }
+
+    public void setHomeChildFragmentCallBack(HomeChildFragmentCallBack homeChildFragmentCallBack1){
+        this.homeChildFragmentCallBack=homeChildFragmentCallBack1;
+    }
+
+    public interface HomeChildFragmentCallBack{
+        void callback(int commodityId);
     }
 }

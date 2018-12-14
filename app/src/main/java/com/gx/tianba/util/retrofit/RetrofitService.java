@@ -1,6 +1,8 @@
 package com.gx.tianba.util.retrofit;
 
 import com.gx.tianba.fragment.home.homechildfragment.bean.HomeChildBean;
+import com.gx.tianba.fragment.home.homeshowfragment.bean.HomeShow;
+import com.gx.tianba.fragment.home.homeshowfragment.bean.HomeShowEvaluate;
 import com.gx.tianba.fragment.my.mychildfragment.myaddaddress.bean.MyAddAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.bean.MyAddressUpdate;
@@ -10,6 +12,7 @@ import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.up.bean.MyPer
 import com.gx.tianba.fragment.my.mychildfragment.myperson.fragment.update.bean.MyPersonUpdate;
 import com.gx.tianba.fragment.my.mychildfragment.mywallet.bean.MyWallet;
 import com.gx.tianba.fragment.search.bean.MyCircle;
+import com.gx.tianba.fragment.shopping.bean.Shopping;
 import com.gx.tianba.login.bean.Login;
 
 import java.io.File;
@@ -98,4 +101,16 @@ public interface RetrofitService {
     @Multipart
     @POST("user/verify/v1/modifyHeadPic")
     Observable<MyPersonUpImage> RetrofitMyPersonUpImage(@Header("userId")int userId, @Header("sessionId")String sessionId,  @Part MultipartBody.Part image);
+
+    //商品详情
+    @GET("commodity/v1/findCommodityDetailsById")
+    Observable<HomeShow> RetrofitHomeShow(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("commodityId")int commodityId);
+
+    //商品评论列表
+    @GET("commodity/v1/CommodityCommentList")
+    Observable<HomeShowEvaluate> RetrofitHomeShowEvaluate(@Query("page")int page,@Query("count")int count,@Query("commodityId")int commodityId);
+
+    //购物车列表
+    @GET("order/verify/v1/findShoppingCart")
+    Observable<Shopping> RetrofitShoppingList(@Header("userId")int userId, @Header("sessionId")String sessionId);
 }

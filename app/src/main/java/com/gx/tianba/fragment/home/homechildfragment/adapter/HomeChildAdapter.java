@@ -23,7 +23,7 @@ public class HomeChildAdapter extends RecyclerView.Adapter<HomeChildAdapter.Home
 
     private Context  context;
     private  List<HomeChildBean.ResultBean> result;
-
+    private OnItemClickListner onItemClickListner;
     public HomeChildAdapter(Context context, List<HomeChildBean.ResultBean> result) {
         this.context = context;
         this.result = result;
@@ -37,13 +37,22 @@ public class HomeChildAdapter extends RecyclerView.Adapter<HomeChildAdapter.Home
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeChildViewHolder homeChildViewHolder, int i) {
-        HomeChildBean.ResultBean resultBean = result.get(i);
+    public void onBindViewHolder(@NonNull final HomeChildViewHolder homeChildViewHolder, int i) {
+        final HomeChildBean.ResultBean resultBean = result.get(i);
         FrescoUtil.load(resultBean.getMasterPic(),homeChildViewHolder.homechilditemimage);
         homeChildViewHolder.homechilditemtext.setText(resultBean.getCommodityName());
         homeChildViewHolder.homechilditemprice.setText("￥:"+resultBean.getPrice());
         homeChildViewHolder.homechilditemsalenum.setText(""+resultBean.getSaleNum());
 
+
+        //点击图片接口回调显示详情
+        homeChildViewHolder.homechilditemimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int commodityId = resultBean.getCommodityId();
+                onItemClickListner.click(commodityId);
+            }
+        });
 
     }
 
@@ -64,5 +73,12 @@ public class HomeChildAdapter extends RecyclerView.Adapter<HomeChildAdapter.Home
             homechilditemprice=itemView.findViewById(R.id.home_child_item_price);
             homechilditemsalenum=itemView.findViewById(R.id.home_child_item_salenum);
         }
+    }
+
+    public void setOnItemClickListner(OnItemClickListner onItemClickListner1){
+        this.onItemClickListner=onItemClickListner1;
+    }
+    public interface OnItemClickListner{
+        void click(int id);
     }
 }

@@ -12,7 +12,7 @@ import com.gx.tianba.fragment.home.HomeFragment;
 import com.gx.tianba.fragment.list.ListFragment;
 import com.gx.tianba.fragment.my.MyFragment;
 import com.gx.tianba.fragment.search.fragment.SearchFragment;
-import com.gx.tianba.fragment.shopping.ShoppingFragment;
+import com.gx.tianba.fragment.shopping.fragment.ShoppingFragment;
 
 import java.util.ArrayList;
 import java.util.List;
