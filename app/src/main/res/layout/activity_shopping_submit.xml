@@ -74,7 +74,7 @@
                     android:layout_height="20dp">
                     <ImageView
                         android:id="@+id/shopping_submit_show_down_up"
-                        android:src="@drawable/ic_expand_more_black_24dp"
+                        android:src="@mipmap/common_btn_drop_down_n_xxhdpi"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
