@@ -19,6 +19,7 @@ import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.ToastUtil;
 import com.gx.tianba.util.sp.SpUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class AllListFragment extends Fragment implements IAlllistView {
     private RecyclerView list_all_list_ryl;
     private AlllistPresenter alllistPresenter;
     private AllListAdapter allListAdapter;
-
+    private List<ListBean.OrderListBean> orderListSum=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,11 +47,35 @@ public class AllListFragment extends Fragment implements IAlllistView {
     @Override
     public void alllistSuccess(ListBean listBean) {
         if (listBean.getStatus().equals("0000")){
-            list_all_list_ryl.setLayoutManager(new LinearLayoutManager(getActivity()));
+            orderListSum.clear();
             List<ListBean.OrderListBean> orderList = listBean.getOrderList();
-            allListAdapter = new AllListAdapter(orderList, getActivity());
+            list_all_list_ryl.setLayoutManager(new LinearLayoutManager(getActivity()));
+            orderListSum.addAll(orderList);
+            allListAdapter = new AllListAdapter(orderListSum, getActivity());
             list_all_list_ryl.setAdapter(allListAdapter);
             list_all_list_ryl.addItemDecoration(new SpacesItemDecoration(30));
+
+            //删除订单
+            allListAdapter.setOnCancleClickListner(new AllListAdapter.OnCancleClickListner() {
+                @Override
+                public void click(String orderId) {
+                    Login.ResultBean spData = SpUtil.getSpData();
+                    alllistPresenter.setPreDeleteListUrl(spData.getUserId(),spData.getSessionId(),orderId);
+                }
+            });
+        }
+        else {
+            ToastUtil.Toast(listBean.getMessage());
+        }
+    }
+
+    //删除订单
+    @Override
+    public void deleteListSuccess(ListBean listBean) {
+        if (listBean.getStatus().equals("0000")) {
+            ToastUtil.Toast(listBean.getMessage());
+            Login.ResultBean spData = SpUtil.getSpData();
+            alllistPresenter.setPreAllListUrl(spData.getUserId(),spData.getSessionId(),0,1,20);
         }
         else {
             ToastUtil.Toast(listBean.getMessage());

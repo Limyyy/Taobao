@@ -19,6 +19,7 @@ import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.ToastUtil;
 import com.gx.tianba.util.sp.SpUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,8 @@ public class WaitPayFragment extends Fragment implements IWaitPayView {
 
     private RecyclerView list_wait_pay_ryl;
     private WaitPayPresenter waitPayPrgesenter;
-
+    private AllListAdapter allListAdapter;
+    private List<ListBean.OrderListBean> orderListSum=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,11 +51,35 @@ public class WaitPayFragment extends Fragment implements IWaitPayView {
     @Override
     public void waitPaySuccess(ListBean listBean) {
         if (listBean.getStatus().equals("0000")){
+            orderListSum.clear();
             list_wait_pay_ryl.setLayoutManager(new LinearLayoutManager(getActivity()));
             List<ListBean.OrderListBean> orderList = listBean.getOrderList();
-            AllListAdapter allListAdapter = new AllListAdapter(orderList, getActivity());
+            orderListSum.addAll(orderList);
+            allListAdapter = new AllListAdapter(orderListSum, getActivity());
             list_wait_pay_ryl.setAdapter(allListAdapter);
             list_wait_pay_ryl.addItemDecoration(new SpacesItemDecoration(30));
+
+            //删除订单
+            allListAdapter.setOnCancleClickListner(new AllListAdapter.OnCancleClickListner() {
+                @Override
+                public void click(String orderId) {
+                    Login.ResultBean spData = SpUtil.getSpData();
+                    waitPayPrgesenter.setPreDeleteListUrl(spData.getUserId(),spData.getSessionId(),orderId);
+                }
+            });
+        }
+        else {
+            ToastUtil.Toast(listBean.getMessage());
+        }
+    }
+
+    //删除订单
+    @Override
+    public void deleteListSuccess(ListBean listBean) {
+        if (listBean.getStatus().equals("0000")) {
+            ToastUtil.Toast(listBean.getMessage());
+            Login.ResultBean spData = SpUtil.getSpData();
+            waitPayPrgesenter.setPreWaitPayUrl(spData.getUserId(),spData.getSessionId(),0,1,20);
         }
         else {
             ToastUtil.Toast(listBean.getMessage());

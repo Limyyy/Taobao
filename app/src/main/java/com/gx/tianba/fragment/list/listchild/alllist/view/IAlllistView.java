@@ -4,4 +4,5 @@ import com.gx.tianba.fragment.list.listchild.bean.ListBean;
 
 public interface IAlllistView {
     void alllistSuccess(ListBean listBean);
+    void deleteListSuccess(ListBean listBean);
 }

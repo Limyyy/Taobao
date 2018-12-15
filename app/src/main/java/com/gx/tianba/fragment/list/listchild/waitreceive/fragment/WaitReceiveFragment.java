@@ -19,6 +19,7 @@ import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.ToastUtil;
 import com.gx.tianba.util.sp.SpUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class WaitReceiveFragment extends Fragment implements IWaitReceiveView {
     private RecyclerView list_wait_receive_ryl;
     private WaitReceivePresenter waitReceivePresenter;
     private WaitReceiveAdapter waitReceiveAdapter;
-
+    private List<ListBean.OrderListBean> orderListSum=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,11 +50,20 @@ public class WaitReceiveFragment extends Fragment implements IWaitReceiveView {
 
     @Override
     public void waitReceiveSuccess(ListBean listBean) {
-        ToastUtil.Toast(listBean.getMessage());
-        List<ListBean.OrderListBean> orderList = listBean.getOrderList();
-        list_wait_receive_ryl.setLayoutManager(new LinearLayoutManager(getActivity()));
-        waitReceiveAdapter = new WaitReceiveAdapter(getActivity(), orderList);
-        list_wait_receive_ryl.setAdapter(waitReceiveAdapter);
-        list_wait_receive_ryl.addItemDecoration(new SpacesItemDecoration(30));
+        if (listBean.getStatus().equals("0000")){
+            orderListSum.clear();
+            List<ListBean.OrderListBean> orderList = listBean.getOrderList();
+            orderListSum.addAll(orderList);
+            list_wait_receive_ryl.setLayoutManager(new LinearLayoutManager(getActivity()));
+            waitReceiveAdapter = new WaitReceiveAdapter(getActivity(), orderListSum);
+            list_wait_receive_ryl.setAdapter(waitReceiveAdapter);
+            list_wait_receive_ryl.addItemDecoration(new SpacesItemDecoration(30));
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        waitReceivePresenter.onDestroy();
     }
 }

@@ -22,6 +22,14 @@ public class WaitPayPresenter {
         });
     }
 
+    public void setPreDeleteListUrl(int userId, String sessionId, String orderId) {
+        waitPayModel.setModDeleteListUrl(userId, sessionId, orderId, new WaitPayModel.DeleteCallBack() {
+            @Override
+            public void deleteListSuccess(ListBean listBean) {
+                iWaitPayView.deleteListSuccess(listBean);
+            }
+        });
+    }
 
     public void onDestroy(){
         if (waitPayModel!=null) {

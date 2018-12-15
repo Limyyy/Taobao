@@ -17,7 +17,7 @@ public class AllListAdapter extends RecyclerView.Adapter<AllListAdapter.AllListV
 
     private List<ListBean.OrderListBean> orderList;
     private Context context;
-
+    private OnCancleClickListner onCancleClickListner;
     public AllListAdapter(List<ListBean.OrderListBean> orderList, Context context) {
         this.orderList = orderList;
         this.context = context;
@@ -35,7 +35,7 @@ public class AllListAdapter extends RecyclerView.Adapter<AllListAdapter.AllListV
 
         ListBean.OrderListBean orderListBean = orderList.get(i);
         //订单编号
-        String orderId = orderListBean.getOrderId();
+        final String orderId = orderListBean.getOrderId();
         allListViewHolder.all_list_item_orderId.setText(orderId);
         //订单时间
         allListViewHolder.all_list_item_time.setText("2018-12-15");
@@ -50,6 +50,15 @@ public class AllListAdapter extends RecyclerView.Adapter<AllListAdapter.AllListV
         //订单总价
         int payAmount = orderListBean.getPayAmount();
         allListViewHolder.all_list_item_goods_sumprice.setText(""+payAmount);
+
+
+        //取消订单接口回调
+        allListViewHolder.all_list_item_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCancleClickListner.click(orderId);
+            }
+        });
     }
 
     @Override
@@ -71,5 +80,12 @@ public class AllListAdapter extends RecyclerView.Adapter<AllListAdapter.AllListV
             all_list_item_gopay=itemView.findViewById(R.id.all_list_item_gopay);
             all_list_item_ryl=itemView.findViewById(R.id.all_list_item_ryl);
         }
+    }
+
+    public void setOnCancleClickListner(OnCancleClickListner onCancleClickListner1){
+        this.onCancleClickListner=onCancleClickListner1;
+    }
+    public interface OnCancleClickListner{
+        void click(String orderId);
     }
 }

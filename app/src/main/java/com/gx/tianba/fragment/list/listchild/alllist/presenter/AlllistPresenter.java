@@ -31,4 +31,13 @@ public class AlllistPresenter {
             alllistModel=null;
         }
     }
+
+    public void setPreDeleteListUrl(int userId, String sessionId, String orderId) {
+        alllistModel.setModDeleteListUrl(userId, sessionId, orderId, new AlllistModel.DeleteCallBack() {
+            @Override
+            public void deleteListSuccess(ListBean listBean) {
+                iAlllistView.deleteListSuccess(listBean);
+            }
+        });
+    }
 }

@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.list.listchild.alllist.fragment.AllListFragment;
-import com.gx.tianba.fragment.list.listchild.completed.CompletedFragment;
-import com.gx.tianba.fragment.list.listchild.waitevaluate.WaitEvalueteFragment;
+import com.gx.tianba.fragment.list.listchild.completed.fragment.CompletedFragment;
+import com.gx.tianba.fragment.list.listchild.waitevaluate.fragment.WaitEvalueteFragment;
 import com.gx.tianba.fragment.list.listchild.waitpay.fragment.WaitPayFragment;
 import com.gx.tianba.fragment.list.listchild.waitreceive.fragment.WaitReceiveFragment;
 
