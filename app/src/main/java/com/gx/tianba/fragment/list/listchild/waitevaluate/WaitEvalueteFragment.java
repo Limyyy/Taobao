@@ -1,4 +1,4 @@
-package com.gx.tianba.fragment.list.listchildfragment;
+package com.gx.tianba.fragment.list.listchild.waitevaluate;
 
 
 import android.os.Bundle;

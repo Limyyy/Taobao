@@ -4,13 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.list.listchild.waitpay.WaitPayFragment">
+    tools:context=".fragment.list.listchild.waitpay.fragment.WaitPayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="待付款" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_wait_pay_ryl"
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.gx.tianba.fragment.list.listchild.alllist.fragment;
+package com.gx.tianba.fragment.list.listchild.waitpay.fragment;
 
 
 import android.app.Fragment;
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 
 import com.gx.tianba.R;
 import com.gx.tianba.fragment.list.listchild.alllist.adapter.AllListAdapter;
-import com.gx.tianba.fragment.list.listchild.alllist.presenter.AlllistPresenter;
 import com.gx.tianba.fragment.list.listchild.alllist.recyclerviewutil.SpacesItemDecoration;
-import com.gx.tianba.fragment.list.listchild.alllist.view.IAlllistView;
 import com.gx.tianba.fragment.list.listchild.bean.ListBean;
+import com.gx.tianba.fragment.list.listchild.waitpay.presenter.WaitPayPresenter;
+import com.gx.tianba.fragment.list.listchild.waitpay.view.IWaitPayView;
 import com.gx.tianba.login.bean.Login;
 import com.gx.tianba.util.ToastUtil;
 import com.gx.tianba.util.sp.SpUtil;
@@ -24,46 +24,45 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AllListFragment extends Fragment implements IAlllistView {
+public class WaitPayFragment extends Fragment implements IWaitPayView {
 
-    private RecyclerView list_all_list_ryl;
-    private AlllistPresenter alllistPresenter;
-    private AllListAdapter allListAdapter;
+    private RecyclerView list_wait_pay_ryl;
+    private WaitPayPresenter waitPayPrgesenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_all_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_wait_pay, container, false);
         initView(view);
 
-        alllistPresenter = new AlllistPresenter(this);
+        waitPayPrgesenter = new WaitPayPresenter(this);
         Login.ResultBean spData = SpUtil.getSpData();
-        alllistPresenter.setPreAllListUrl(spData.getUserId(),spData.getSessionId(),0,1,20);
+        waitPayPrgesenter.setPreWaitPayUrl(spData.getUserId(),spData.getSessionId(),1,1,20);
         return view;
     }
 
+    private void initView(View view) {
+        list_wait_pay_ryl = (RecyclerView) view.findViewById(R.id.list_wait_pay_ryl);
+    }
+
     @Override
-    public void alllistSuccess(ListBean listBean) {
+    public void waitPaySuccess(ListBean listBean) {
         if (listBean.getStatus().equals("0000")){
-            list_all_list_ryl.setLayoutManager(new LinearLayoutManager(getActivity()));
+            list_wait_pay_ryl.setLayoutManager(new LinearLayoutManager(getActivity()));
             List<ListBean.OrderListBean> orderList = listBean.getOrderList();
-            allListAdapter = new AllListAdapter(orderList, getActivity());
-            list_all_list_ryl.setAdapter(allListAdapter);
-            list_all_list_ryl.addItemDecoration(new SpacesItemDecoration(30));
+            AllListAdapter allListAdapter = new AllListAdapter(orderList, getActivity());
+            list_wait_pay_ryl.setAdapter(allListAdapter);
+            list_wait_pay_ryl.addItemDecoration(new SpacesItemDecoration(30));
         }
         else {
             ToastUtil.Toast(listBean.getMessage());
         }
     }
 
-    private void initView(View view) {
-        list_all_list_ryl = (RecyclerView) view.findViewById(R.id.list_all_list_ryl);
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        alllistPresenter.onDestroy();
+        waitPayPrgesenter.onDestroy();
     }
 }

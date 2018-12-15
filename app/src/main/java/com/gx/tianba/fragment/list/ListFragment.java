@@ -14,8 +14,8 @@ import com.gx.tianba.R;
 import com.gx.tianba.fragment.list.listchild.alllist.fragment.AllListFragment;
 import com.gx.tianba.fragment.list.listchild.completed.CompletedFragment;
 import com.gx.tianba.fragment.list.listchild.waitevaluate.WaitEvalueteFragment;
-import com.gx.tianba.fragment.list.listchild.waitpay.WaitPayFragment;
-import com.gx.tianba.fragment.list.listchild.waitreceive.WaitReceiveFragment;
+import com.gx.tianba.fragment.list.listchild.waitpay.fragment.WaitPayFragment;
+import com.gx.tianba.fragment.list.listchild.waitreceive.fragment.WaitReceiveFragment;
 
 /**
  * A simple {@link Fragment} subclass.

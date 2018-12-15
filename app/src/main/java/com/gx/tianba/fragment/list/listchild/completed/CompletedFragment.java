@@ -1,4 +1,4 @@
-package com.gx.tianba.fragment.list.listchildfragment;
+package com.gx.tianba.fragment.list.listchild.completed;
 
 
 import android.os.Bundle;
