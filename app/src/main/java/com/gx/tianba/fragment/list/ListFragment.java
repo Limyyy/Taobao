@@ -11,11 +11,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.gx.tianba.R;
-import com.gx.tianba.fragment.list.listchildfragment.AllListFragment;
-import com.gx.tianba.fragment.list.listchildfragment.CompletedFragment;
-import com.gx.tianba.fragment.list.listchildfragment.WaitEvalueteFragment;
-import com.gx.tianba.fragment.list.listchildfragment.WaitPayFragment;
-import com.gx.tianba.fragment.list.listchildfragment.WaitReceiveFragment;
+import com.gx.tianba.fragment.list.listchild.alllist.fragment.AllListFragment;
+import com.gx.tianba.fragment.list.listchild.completed.CompletedFragment;
+import com.gx.tianba.fragment.list.listchild.waitevaluate.WaitEvalueteFragment;
+import com.gx.tianba.fragment.list.listchild.waitpay.WaitPayFragment;
+import com.gx.tianba.fragment.list.listchild.waitreceive.WaitReceiveFragment;
 
 /**
  * A simple {@link Fragment} subclass.

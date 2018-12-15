@@ -4,12 +4,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".fragment.list.listchildfragment.AllListFragment">
+    tools:context=".fragment.list.listchild.alllist.fragment.AllListFragment">
 
-    <TextView
-        android:text="全部订单"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_all_list_ryl"
         android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.gx.tianba.util.retrofit;
 import com.gx.tianba.fragment.home.homechildfragment.bean.HomeChildBean;
 import com.gx.tianba.fragment.home.homeshowfragment.bean.HomeShow;
 import com.gx.tianba.fragment.home.homeshowfragment.bean.HomeShowEvaluate;
+import com.gx.tianba.fragment.list.listchild.bean.ListBean;
 import com.gx.tianba.fragment.my.mychildfragment.myaddaddress.bean.MyAddAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.bean.MyAddress;
 import com.gx.tianba.fragment.my.mychildfragment.myaddress.fragment.update.bean.MyAddressUpdate;
@@ -119,4 +120,8 @@ public interface RetrofitService {
     @POST("order/verify/v1/createOrder")
     @FormUrlEncoded
     Observable<ShoppingSubmit> retrofitShoppingSubmit(@Header("userId")int userId, @Header("sessionId")String sessionId, @Field("totalPrice")double totalPrice, @Field("addressId")int addressId, @Field("orderInfo")String orderInfo);
+
+    //全部订单查询
+    @GET("order/verify/v1/findOrderListByStatus")
+    Observable<ListBean> retrofitAllList(@Header("userId")int userId, @Header("sessionId")String sessionId,@Query("status")int status,@Query("page")int page,@Query("count")int count);
 }
